@@ -32,8 +32,8 @@ ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 
 RULE_FULL = {
-    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.7, 'max': 2.5}},
-    # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75, 'max': 2.5}},
+    'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
     'initial_minutes': {'min': 0, 'max': 0},
     'half_time': 45,
@@ -41,22 +41,10 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'arleady_goals': {
-        5: {'allow_quick_goal_num': 1,'parties_goals_minus_min':1, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 70, 'max': 80}, 'last_half_goals': {'min': 1, 'max': 3},
-            'when_last_half_goals':{
-                1: {'half_first_goal_time_max': 40 },  
-                2: {'half_first_goal_time_max': 30, 'half_last_goal_time_min': 30, },   #上半场2个进球，则第2个进球时间必须大于30分钟
-                3: {'half_first_goal_time_max': 15, 'half_last_goal_time_min': 30, 'next_last_two_interval_min': 10}, #上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
-                
+        5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 45, 'max': 80}, 'last_half_goals': {'min': 2, 'max': 4},
+            
             },
-            },
-        6: {'allow_quick_goal_num': 1, 'parties_goals_minus_min':1, 'goal_cancel_forbidden':True, 'latest_goal_times': {'min': 70, 'max': 80}, 'last_half_goals': {'min': 2, 'max': 4},
-            'when_last_half_goals': {
-                2: {'half_first_goal_time_max': 30, 'half_last_goal_time_min': 30, },  # 上半场2个进球，则第2个进球时间必须大于30分钟
-                3: {'half_first_goal_time_max': 15, 'half_last_goal_time_min': 30,}, # 上半场3个进球，则第3个进球时间必须大于30分钟
-                4: {'half_first_goal_time_max': 15, 'half_last_goal_time_min': 30, 'next_last_two_interval_min': 10, },  # 上半场4个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
-               
-            },
-            },
+        
            },
         'ready_bets':{
             '2':{'obey_any_success': True },
