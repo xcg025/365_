@@ -47,8 +47,8 @@ class Bet365Full(Bet365):
                        time_now <= userConfig.RULE_FULL['initial_minutes']['max'])
             handicap_ok = handicap in userConfig.RULE_FULL['initial_handicaps']
 
-            if time_ok and handicap_ok:
-            # if time_ok:
+            # if time_ok and handicap_ok:
+            if time_ok:
                 matchDict = {
                     'parties_name': names,
                     'score': score,
