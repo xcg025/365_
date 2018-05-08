@@ -1,11 +1,112 @@
-interval_cond = {'fsdafas': 1}
-interval = interval_cond.get('hhh', None)
-print(interval)
-if interval == None:
-    print(interval)
+MONGO_URL = 'localhost'
+MONGO_DB_FULL = 'bet365_full'
+MONGO_DB_HALF = 'bet365_half'
+MONGO_DB_DSFOOTBALL = 'dsfootball'
 
-score = '3:5'
-score_a = int(score.split(':')[0])
-score_b = int(score.split(':')[1])
-if abs(score_a - score_b) <= 1:
-    print('dasfasf')
+MONGO_TABLE_COLLECTIONS = 'collections'
+MONGO_TABLE_BETS = 'bets'
+MONGO_TABLE_SUCCESSES = 'successes'
+MONGO_TABLE_BALANCE = 'balance'
+
+URL = 'https://www.7788365365.com/#/HO/'
+# URL = 'https://www.356884.com/zh-CHS/'
+# URL = 'https://www.365-838.com/zh-CHS/'
+refreshMin = 0
+isChromeDriver = True
+SpiderInterval = 3
+ItemExchangeInterval = 2 * 60
+BetSportItem = '足球'
+BetSport = '滚球盘'
+AsiaHalfItem = '上半場亞洲盤'
+# ForbiddenLeagues_Half = ['80分钟', '19', '20', '女', '英格兰', '苏格兰', '威尔士', '爱尔兰', '巴西', '以色列', '阿根廷', '葡萄牙', '西班牙', '法国', '意大利', '德国', '伊朗', '哥斯达黎加', '希腊', '阿联酋 - 超级联赛', '香港超级联赛','阿尔及利亚杯', '欧洲友谊赛']
+ForbiddenLeagues_Half = ['80分钟']
+ForbiddenMatches_Half = ['80分钟']
+
+ForbiddenLeagues_Full = ['80分钟', '女', '19']
+ForbiddenMatches_Full = ['80分钟', '女', '19']
+
+# full_lgt_min = 45
+# full_lgt_max = 75
+# full_lgt_max_1 = 80
+
+
+RULE_FULL = {
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.7, 'max': 2.5}},
+    'initial_ratios': {'weak': {'min': 1.0, 'max': 1.55}, 'strong': {'min': 5, 'max': 12}},
+    # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
+    'initial_minutes': {'min': 0, 'max': 0},
+    'half_time': 45,
+    'full_time': 90,
+    'quick_goal_interval': 4.30,
+    'all_bets_info': {
+        'arleady_goals': {
+            5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden': True, 'latest_goal_times': {'min': 45, 'max': 80},
+                'last_half_goals': {'min': 2, 'max': 4},
+                'when_last_half_goals': {
+                    3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26, },
+                # 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+                    4: {'half_last_goal_time_min': 30, },  # 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+                },
+
+                },
+
+        },
+        'ready_bets': {
+            '2': {'obey_any_success': True},
+            '3': {'obey_any_success': True},
+            '4': {'obey_any_success': True},
+            '5': {'obey_any_success': True},
+            '6': {'obey_any_success': True},
+        }
+    },
+}
+
+half_lgt_min = 28
+half_lgt_max = 38
+
+half_fgt_min = 0
+half_fgt_max = 10
+
+RULE_HALF = {
+    # 'initial_handicaps':{'0.5':{'min':1.0, 'max':2.5}, '0.5,1.0':{'min':1.0, 'max':2.5},
+    #  '1':{'min':1.0, 'max':2.5}, '1.0':{'min':1.0, 'max':2.5},
+    #  '1.0,1.5': {'min': 2.05, 'max': 2.5}} ,
+    'initial_handicaps': {'1.0,1.5': {'min': 1.5, 'max': 1.8}, '1.5': {'min': 1.0, 'max': 2.155}},
+    # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
+    'initial_minutes': {'min': 0, 'max': 0},
+    'half_time': 45,
+    'quick_goal_interval': 4,
+    'all_bets_info': {
+        'arleady_goals': {
+            # 3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
+            3: {'allow_quick_goal_num': 0, 'goal_cancel_forbidden': True,
+                'all_goal_times': {
+                    1: {'min': 0, 'max': 17},
+                    2: {'min': 15, 'max': 29},
+                    3: {'min': 29, 'max': 38}
+                }},
+        },
+        'ready_bets': {
+            '2': {'obey_any_success': True},
+            '3': {'obey_any_success': True},
+            '4': {'obey_any_success': True},
+            '5': {'obey_any_success': True}
+        }
+    },
+}
+
+
+def min_max_condition(conditions, condition):
+    return condition >= conditions['min'] and condition <= conditions['max']
+
+infos_all = RULE_HALF['all_bets_info']['arleady_goals'][3]
+goals_time = [10, 12, 40]
+
+#各个进球时间是否满足条件
+all_goal_times_dict = infos_all.get('all_goal_times', None)
+if all_goal_times_dict:
+    for goal_num, times in all_goal_times_dict.items():
+        if min_max_condition(times, float(goals_time[goal_num-1])) == False:
+            print(' {}_goal_time_ok=no'.format( goal_num))
+            break
+

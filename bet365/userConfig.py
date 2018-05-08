@@ -61,28 +61,24 @@ RULE_FULL = {
 }
 
 
-half_lgt_min = 28
-half_lgt_max = 38
-
-half_fgt_min = 0
-half_fgt_max = 10
-
 RULE_HALF = {
     # 'initial_handicaps':{'0.5':{'min':1.0, 'max':2.5}, '0.5,1.0':{'min':1.0, 'max':2.5},
                             #  '1':{'min':1.0, 'max':2.5}, '1.0':{'min':1.0, 'max':2.5},
                             #  '1.0,1.5': {'min': 2.05, 'max': 2.5}} ,
-    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.0, 'max':2.155},'2.0':{'min':1.0, 'max':2.5},'2':{'min':1.0, 'max':2.5}},
+    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.825}, '1.5':{'min':1.0, 'max':2.155}},
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
     'quick_goal_interval':4,
     'all_bets_info':{
         'arleady_goals':{
-                3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
-                # 4:{'latest_goal_times':{'min':half_lgt_min, 'max':half_lgt_max}, 'first_goal_times':{'min':half_fgt_min, 'max':half_fgt_max}, 'allow_quick_goal_num':10},
-                # 5:{'latest_goal_times':{'min':half_lgt_min, 'max':half_lgt_max}, 'first_goal_times':{'min':half_fgt_min, 'max':half_fgt_max}, 'allow_quick_goal_num':10},
-                # 6:{'latest_goal_times':{'min':half_lgt_min, 'max':half_lgt_max}, 'first_goal_times':{'min':half_fgt_min, 'max':half_fgt_max}, 'allow_quick_goal_num':10},
-                # 7:{'latest_goal_times':{'min':half_lgt_min, 'max':half_lgt_max}, 'first_goal_times':{'min':half_fgt_min, 'max':half_fgt_max}, 'allow_quick_goal_num':10},
+                # 3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
+                3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,
+                   'all_goal_times': {
+                       1:{'min':0, 'max':17},
+                       2:{'min':15, 'max':29},
+                       3:{'min':29, 'max':38}
+                   }},
         },
         'ready_bets':{
             '2':{'obey_any_success': True},
