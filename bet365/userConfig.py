@@ -65,7 +65,7 @@ RULE_HALF = {
     # 'initial_handicaps':{'0.5':{'min':1.0, 'max':2.5}, '0.5,1.0':{'min':1.0, 'max':2.5},
                             #  '1':{'min':1.0, 'max':2.5}, '1.0':{'min':1.0, 'max':2.5},
                             #  '1.0,1.5': {'min': 2.05, 'max': 2.5}} ,
-    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.825}, '1.5':{'min':1.85, 'max':2.5}},
+    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.85, 'max':2.5}},
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
