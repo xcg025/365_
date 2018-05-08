@@ -69,7 +69,7 @@ RULE_HALF = {
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
-    'quick_goal_interval':4,
+    'quick_goal_interval':3,
     'all_bets_info':{
         'arleady_goals':{
                 # 3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
