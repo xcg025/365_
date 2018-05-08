@@ -21,7 +21,7 @@ class Mail():
         self.smtp_server = 'smtp.126.com'
         self.server = smtplib.SMTP(self.smtp_server, 25)
         self.server.login(self.from_addr, self.pwd)
-        self.server.set_debuglevel(1)
+        self.server.set_debuglevel(0)
 
 
     def run(self, subject, message):

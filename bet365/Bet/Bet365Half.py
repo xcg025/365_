@@ -160,7 +160,7 @@ class Bet365Half(Bet365):
                                                            self.collections[md5])
                             if delete_ok and save_ok:
                                 Logging.info('{}---{}'.format(cancel_hint, self.collections[md5]))
-                                # Mail.send(cancel_hint, json.dumps(self.collections[md5], ensure_ascii=False))
+                                Mail.send(cancel_hint, json.dumps(self.collections[md5], ensure_ascii=False))
                     elif self.collections[md5]['goal_cancel'] == False and all_goals == win_goals:
                         self.collections[md5]['any_bet_succeed'] = True
                         betted_success = False
@@ -176,19 +176,26 @@ class Bet365Half(Bet365):
                                                                self.collections[md5])
                             if delete_ok and save_ok:
                                 Logging.info('{}---{}'.format(win_hint, self.collections[md5]))
-                                # Mail.send(win_hint, json.dumps(self.collections[md5], ensure_ascii=False))
+                                Mail.send(win_hint, json.dumps(self.collections[md5], ensure_ascii=False))
                             continue
 
-                infos = userConfig.RULE_HALF['all_bets_info']['arleady_goals']
-
                 # 是否在规定的时间内满足进球数
-                if all_goals not in infos:
+                if all_goals not in userConfig.RULE_HALF['all_bets_info']['arleady_goals']:
                     continue
 
+                infos_all = userConfig.RULE_HALF['all_bets_info']['arleady_goals'][all_goals]
+                goals_time = self.collections[md5]['goals_time']
+
                 #是否满足快速进球数
-                allow_quick_goal_num = infos[all_goals]['allow_quick_goal_num']
-                if self.collections[md5]['all_quick_goal_num'] > allow_quick_goal_num:
+                allow_quick_goal_num = infos_all.get('allow_quick_goal_num', -1)
+                if allow_quick_goal_num != -1 and self.collections[md5]['all_quick_goal_num'] > allow_quick_goal_num:
                     print('{}, allow_quick_goal_num_ok=no'.format(names))
+                    continue
+
+                # 是否有球取消
+                goal_cancel_forbidden = infos_all.get('goal_cancel_forbidden', False)
+                if goal_cancel_forbidden and self.collections[md5]['goal_cancel']:
+                    print('{}, goal_cancel_ok=no'.format(names))
                     continue
 
                 # #是否存在 X:0或0:X的情况
@@ -199,18 +206,16 @@ class Bet365Half(Bet365):
                 #     continue
 
                 # 最近进球时间是否满足条件
-                goals_time = self.collections[md5]['goals_time']
-                latest_goal_time_ok = self.min_max_condition(infos[all_goals]['latest_goal_times'], float(goals_time[-1]))
-                if latest_goal_time_ok == False:
+                latest_goal_times = infos_all.get('latest_goal_times', None)
+                if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:
                     print('{}, last_goal_time_ok=no'.format(names))
                     continue
 
                 #第一个进球时间是否满足条件
-                first_goal_time_ok = self.min_max_condition(infos[all_goals]['first_goal_times'], float(goals_time[0]))
-                if first_goal_time_ok == False:
+                first_goal_times = infos_all.get('first_goal_times', None)
+                if first_goal_times and self.min_max_condition(first_goal_times, float(goals_time[0])) == False:
                     print('{}, first_goal_time_ok=no'.format(names))
                     continue
-
 
                 #---------------------以下代码可以不动------------------------
                 # 投注的进球数是否满足条件
@@ -273,7 +278,7 @@ class Bet365Half(Bet365):
                 if delete_ok:
                     if betted_lose == True:
                         Logging.info('{}---{}'.format(lose_hint, self.collections[md5_key]))
-                        # Mail.send(lose_hint, json.dumps(self.collections[md5_key], ensure_ascii=False))
+                        Mail.send(lose_hint, json.dumps(self.collections[md5_key], ensure_ascii=False))
                     else:
                         pass
                         # Logging.info('比赛结束,删除比赛---{}'.format(self.collections[md5_key]))
