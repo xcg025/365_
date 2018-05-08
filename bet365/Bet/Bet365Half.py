@@ -160,7 +160,7 @@ class Bet365Half(Bet365):
                                                            self.collections[md5])
                             if delete_ok and save_ok:
                                 Logging.info('{}---{}'.format(cancel_hint, self.collections[md5]))
-                                Mail.send(cancel_hint, json.dumps(self.collections[md5], ensure_ascii=False))
+                                Mail.send(cancel_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
                     elif self.collections[md5]['goal_cancel'] == False and all_goals == win_goals:
                         self.collections[md5]['any_bet_succeed'] = True
                         betted_success = False
@@ -176,7 +176,7 @@ class Bet365Half(Bet365):
                                                                self.collections[md5])
                             if delete_ok and save_ok:
                                 Logging.info('{}---{}'.format(win_hint, self.collections[md5]))
-                                Mail.send(win_hint, json.dumps(self.collections[md5], ensure_ascii=False))
+                                Mail.send(win_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
                             continue
 
                 # 是否在规定的时间内满足进球数
@@ -292,7 +292,7 @@ class Bet365Half(Bet365):
                 if delete_ok:
                     if betted_lose == True:
                         Logging.info('{}---{}'.format(lose_hint, self.collections[md5_key]))
-                        Mail.send(lose_hint, json.dumps(self.collections[md5_key], ensure_ascii=False))
+                        Mail.send(lose_hint, json.dumps(self.collections[md5_key]['parties_name'], ensure_ascii=False))
                     else:
                         pass
                         # Logging.info('比赛结束,删除比赛---{}'.format(self.collections[md5_key]))
