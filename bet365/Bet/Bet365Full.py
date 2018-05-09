@@ -241,9 +241,9 @@ class Bet365Full(Bet365):
                     print('{}, last_goal_time_ok=no'.format(names))
                     continue
 
-                #判断两队进球比分相差是否小于等于1
+                #判断两队进球比分相差是否小于2
                 parties_goals_minus_min = infos_all.get('parties_goals_minus_min', -1)
-                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) <= parties_goals_minus_min:
+                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) < parties_goals_minus_min:
                     print('{}, parties_goals_minus_ok=no'.format(names))
                     continue
 
