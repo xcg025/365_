@@ -41,7 +41,7 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'arleady_goals': {
-        5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 45, 'max': 80}, 'last_half_goals': {'min': 2, 'max': 4},
+        5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden':True,'parties_goals_minus_min':1 , 'latest_goal_times': {'min': 45, 'max': 80}, 'last_half_goals': {'min': 2, 'max': 4},
             'when_last_half_goals': {
                 3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
                 4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
