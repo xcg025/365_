@@ -198,6 +198,12 @@ class Bet365Half(Bet365):
                     print('{}, goal_cancel_ok=no'.format(names))
                     continue
 
+                #判断两队进球比分相差是否小于2
+                parties_goals_minus_min = infos_all.get('parties_goals_minus_min', -1)
+                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) < parties_goals_minus_min:
+                    print('{}, parties_goals_minus_ok=no'.format(names))
+                    continue
+
                 #各个进球时间是否满足条件
                 all_goal_times_dict = infos_all.get('all_goal_times', None)
                 all_goal_times_ok = True

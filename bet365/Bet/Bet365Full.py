@@ -238,7 +238,7 @@ class Bet365Full(Bet365):
                 # 最近进球时间是否满足条件
                 latest_goal_times = infos_all.get('latest_goal_times', None)
                 if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:
-                    print('{}, last_goal_time_ok=no'.format(names))
+                    print('{}, latest_goal_time_ok=no'.format(names))
                     continue
 
                 #判断两队进球比分相差是否小于2
