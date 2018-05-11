@@ -23,8 +23,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟', '19']
 ForbiddenMatches_Half = ['80分钟', '19']
 
-ForbiddenLeagues_Full = ['80分钟', '女', '19']
-ForbiddenMatches_Full = ['80分钟', '女', '19']
+ForbiddenLeagues_Full = ['80分钟', '女',]
+ForbiddenMatches_Full = ['80分钟', '女',]
 
 # full_lgt_min = 45
 # full_lgt_max = 75
@@ -32,7 +32,7 @@ ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 
 RULE_FULL = {
-    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.85, 'max': 2.5}},
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.7, 'max': 2.5}},
     'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
     'initial_minutes': {'min': 0, 'max': 0},
