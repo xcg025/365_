@@ -20,8 +20,8 @@ BetSportItem = '足球'
 BetSport = '滚球盘'
 AsiaHalfItem = '上半場亞洲盤'
 # ForbiddenLeagues_Half = ['80分钟', '19', '20', '女', '英格兰', '苏格兰', '威尔士', '爱尔兰', '巴西', '以色列', '阿根廷', '葡萄牙', '西班牙', '法国', '意大利', '德国', '伊朗', '哥斯达黎加', '希腊', '阿联酋 - 超级联赛', '香港超级联赛','阿尔及利亚杯', '欧洲友谊赛']
-ForbiddenLeagues_Half = ['80分钟', '19']
-ForbiddenMatches_Half = ['80分钟', '19']
+ForbiddenLeagues_Half = ['80分钟', '19', '女', '德国']
+ForbiddenMatches_Half = ['80分钟', '19', '女', '德国']
 
 ForbiddenLeagues_Full = ['80分钟', '女', '19']
 ForbiddenMatches_Full = ['80分钟', '女', '19']
@@ -65,8 +65,9 @@ RULE_HALF = {
     # 'initial_handicaps':{'0.5':{'min':1.0, 'max':2.5}, '0.5,1.0':{'min':1.0, 'max':2.5},
                             #  '1':{'min':1.0, 'max':2.5}, '1.0':{'min':1.0, 'max':2.5},
                             #  '1.0,1.5': {'min': 2.05, 'max': 2.5}} ,
+'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 2.05}, '1.5':{'min':1.8, 'max':2.5}},
     # 'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.8, 'max':2.5}},
-    'initial_handicaps':{ '1.5':{'min':1.8, 'max':2.5}},
+    #'initial_handicaps':{ '1.5':{'min':1.8, 'max':2.5}},
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
@@ -74,12 +75,12 @@ RULE_HALF = {
     'all_bets_info':{
         'arleady_goals':{
                 # 3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
-                3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,
+1:{  'goal_cancel_forbidden':True,
                    'all_goal_times': {
-                       1:{'min':0, 'max':15},
-                       2:{'min':15, 'max':30},
-                       3:{'min':31, 'max':38}
+                       1:{'min':21, 'max':25}
                    }},
+              
+
         },
         'ready_bets':{
             '2':{'obey_any_success': True},
