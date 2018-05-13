@@ -193,6 +193,7 @@ class Bet365Half(Bet365):
                     self.collections.pop(md5)
                     continue
 
+
                 #是否满足快速进球数
                 allow_quick_goal_num = infos_all.get('allow_quick_goal_num', -1)
                 if allow_quick_goal_num != -1 and self.collections[md5]['all_quick_goal_num'] > allow_quick_goal_num:
