@@ -1,4 +1,4 @@
-﻿MONGO_URL = 'localhost'
+﻿﻿MONGO_URL = 'localhost'
 MONGO_DB_FULL = 'bet365_full'
 MONGO_DB_HALF = 'bet365_half'
 MONGO_DB_DSFOOTBALL = 'dsfootball'

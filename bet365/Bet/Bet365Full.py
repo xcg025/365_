@@ -62,7 +62,7 @@ class Bet365Full(Bet365):
                     'score': score,
                     'goals_time': [],
                     'interval_goals_time':[],
-                    'times_betteds': {'3':False, '4':False, '2': False},
+                    'times_betteds': {'3':False, '4':False},
                     'full_handicap': handicap,
                     'full_handicap_odds': odds,
                     'play_time': 0.0,
@@ -245,10 +245,10 @@ class Bet365Full(Bet365):
                 # 最近进球时间是否满足条件
                 latest_goal_times = infos_all.get('latest_goal_times', None)
                 if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:
-                    print('{}, last_goal_time_ok=no'.format(names))
+                    print('{}, latest_goal_time_ok=no'.format(names))
                     continue
 
-                #判断两队进球比分相差是否小于等于1
+                #判断两队进球比分相差是否小于2
                 parties_goals_minus_min = infos_all.get('parties_goals_minus_min', -1)
                 if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) < parties_goals_minus_min:
                     print('{}, parties_goals_minus_ok=no'.format(names))
