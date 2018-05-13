@@ -1,4 +1,4 @@
-﻿﻿from Bet.Bet365 import Bet365
+﻿from Bet.Bet365 import Bet365
 from FireFoxDriverTool.FireFoxDriver import FireFoxDriver, ByType
 from pyquery import PyQuery as pq
 import time, json
