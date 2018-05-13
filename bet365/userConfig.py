@@ -96,7 +96,7 @@ RULE_HALF = {
                 },
                 4:{ 'allow_quick_goal_num':1, 'goal_cancel_forbidden':True, 'one_party_zero':True,
                     'all_goal_times': {
-                        1: {'min': 0, 'max': 16},
+                        1: {'min': 0, 'max': 10},
                         4: {'min': 23, 'max': 38}
                     }
                 },
