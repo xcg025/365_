@@ -20,8 +20,8 @@ BetSportItem = '足球'
 BetSport = '滚球盘'
 AsiaHalfItem = '上半場亞洲盤'
 # ForbiddenLeagues_Half = ['80分钟', '19', '20', '女', '英格兰', '苏格兰', '威尔士', '爱尔兰', '巴西', '以色列', '阿根廷', '葡萄牙', '西班牙', '法国', '意大利', '德国', '伊朗', '哥斯达黎加', '希腊', '阿联酋 - 超级联赛', '香港超级联赛','阿尔及利亚杯', '欧洲友谊赛']
-ForbiddenLeagues_Half = ['80分钟', '19']
-ForbiddenMatches_Half = ['80分钟', '19']
+ForbiddenLeagues_Half = ['80分钟',]
+ForbiddenMatches_Half = ['80分钟',]
 
 ForbiddenLeagues_Full = ['80分钟',]
 ForbiddenMatches_Full = ['80分钟',]
