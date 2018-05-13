@@ -90,11 +90,13 @@ RULE_HALF = {
         'arleady_goals':{
                 3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True, 'one_party_zero':True,
                     'all_goal_times': {
+                        1: {'min': 0, 'max': 16},
                         3: {'min': 23, 'max': 38}
                     }
                 },
                 4:{ 'allow_quick_goal_num':1, 'goal_cancel_forbidden':True, 'one_party_zero':True,
                     'all_goal_times': {
+                        1: {'min': 0, 'max': 16},
                         4: {'min': 23, 'max': 38}
                     }
                 },
