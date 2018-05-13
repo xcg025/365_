@@ -186,6 +186,13 @@ class Bet365Half(Bet365):
                 infos_all = userConfig.RULE_HALF['all_bets_info']['arleady_goals'][all_goals]
                 goals_time = self.collections[md5]['goals_time']
 
+                # 是否存在 X:0或0:X的情况
+                one_party_zero = infos_all.get('one_party_zero', False)
+                goal_a, goal_b = int(score.split(':')[0]), int(score.split(':')[1])
+                if one_party_zero and (goal_a * goal_b != 0):
+                    self.collections.pop(md5)
+                    continue
+
                 #是否满足快速进球数
                 allow_quick_goal_num = infos_all.get('allow_quick_goal_num', -1)
                 if allow_quick_goal_num != -1 and self.collections[md5]['all_quick_goal_num'] > allow_quick_goal_num:
@@ -197,14 +204,6 @@ class Bet365Half(Bet365):
                 if goal_cancel_forbidden and self.collections[md5]['goal_cancel']:
                     print('{}, goal_cancel_ok=no'.format(names))
                     continue
-
-                # 是否存在 X:0或0:X的情况
-                one_party_zero = infos_all.get('one_party_zero', False)
-                goal_a, goal_b = int(score.split(':')[0]), int(score.split(':')[1])
-                if one_party_zero and (goal_a * goal_b != 0):
-                    self.collections.pop(md5)
-                    continue
-
 
                 #各个进球时间是否满足条件
                 all_goal_times_dict = infos_all.get('all_goal_times', None)
