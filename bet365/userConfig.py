@@ -23,8 +23,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟', '19']
 ForbiddenMatches_Half = ['80分钟', '19']
 
-ForbiddenLeagues_Full = ['80分钟', '女', '19']
-ForbiddenMatches_Full = ['80分钟', '女', '19']
+ForbiddenLeagues_Full = ['80分钟',]
+ForbiddenMatches_Full = ['80分钟',]
 
 # full_lgt_min = 45
 # full_lgt_max = 75
@@ -32,8 +32,8 @@ ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 
 RULE_FULL = {
-    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.7, 'max': 2.5}},
-    'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75 , 'max': 2.5}},
+    'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},
     # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
     'initial_minutes': {'min': 0, 'max': 0},
     'half_time': 45,
@@ -41,12 +41,27 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'arleady_goals': {
-        5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 45, 'max': 80}, 'last_half_goals': {'min': 2, 'max': 4},
-            'when_last_half_goals': {
-                3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
-                4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+        3: {'allow_quick_goal_num': 0, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 68, 'max': 75}, 'last_half_goals': {'min': 1, 'max': 2},
+            # 'when_last_half_goals': {
+            #     3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            #     4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            # },
+
             },
-            
+        4: {'allow_quick_goal_num': 0, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 68, 'max': 75}, 'last_half_goals': {'min': 2, 'max':2 },
+            # 'when_last_half_goals': {
+            #     3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            #     4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            # },
+
+            },
+
+        5: {'allow_quick_goal_num': 2, 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 68, 'max': 75}, 'last_half_goals': {'min': 2, 'max': 3},
+            # 'when_last_half_goals': {
+            #     3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            #     4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
+            # },
+
             },
         
         },
@@ -70,16 +85,19 @@ RULE_HALF = {
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
-    'quick_goal_interval':6,
+    'quick_goal_interval':3.30,
     'all_bets_info':{
         'arleady_goals':{
-                # 3:{'latest_goal_times':{'min':29, 'max':38}, 'first_goal_times':{'min':0, 'max':17}, 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,},
-                3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True,
-                   'all_goal_times': {
-                       1:{'min':0, 'max':15},
-                       2:{'min':15, 'max':30},
-                       3:{'min':31, 'max':38}
-                   }},
+                3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True, 'one_party_zero':True,
+                    'all_goal_times': {
+                        3: {'min': 23, 'max': 38}
+                    }
+                },
+                4:{ 'allow_quick_goal_num':1, 'goal_cancel_forbidden':True, 'one_party_zero':True,
+                    'all_goal_times': {
+                        4: {'min': 23, 'max': 38}
+                    }
+                },
         },
         'ready_bets':{
             '2':{'obey_any_success': True},

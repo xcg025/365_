@@ -39,16 +39,24 @@ class Bet365Full(Bet365):
             score = MatchParse.scoreForMatch(aMatch)
             handicap = MatchParse.fullHandicapForMatch(aMatch)
             odds = float(MatchParse.fullOddsForMatch(aMatch))
-            # ratios = MatchParse.fullRatioForMatch(aMatch)
+            ratios = MatchParse.fullRatioForMatch(aMatch)
             all_goals = int(score.split(':')[0]) + int(score.split(':')[1]) if score != None else 0
 
-            # 初步筛选比赛
+            # 筛选比赛
             time_ok = (time_now >= userConfig.RULE_FULL['initial_minutes']['min'] and \
                        time_now <= userConfig.RULE_FULL['initial_minutes']['max'])
-            handicap_ok = handicap in userConfig.RULE_FULL['initial_handicaps']
+            odds_ok = False
+            if handicap in userConfig.RULE_FULL['initial_handicaps']:
+                odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
+                           odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
 
-            # if time_ok and handicap_ok:
-            if time_ok:
+            sorted_ratio = sorted(ratios)
+            ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
+                         sorted_ratio[0] <= userConfig.RULE_FULL['initial_ratios']['weak']['max']) and \
+                        (sorted_ratio[1] >= userConfig.RULE_FULL['initial_ratios']['strong']['min'] and \
+                         sorted_ratio[1] <= userConfig.RULE_FULL['initial_ratios']['strong']['max'])
+
+            if time_ok and odds_ok and ratios_ok :
                 matchDict = {
                     'parties_name': names,
                     'score': score,
@@ -60,7 +68,7 @@ class Bet365Full(Bet365):
                     'play_time': 0.0,
                     'start_time': None,
                     '_id': md5,
-                    # 'ratio': ratio,
+                    'ratios': ratios,
                     'league': self.league,
                     'all_goals': 0,
                     'win_goals': 0,
@@ -86,18 +94,18 @@ class Bet365Full(Bet365):
             if md5 in self.collections.keys() and time_now != 0:
                 # 更新比赛开始的时间且加入数据库
                 if self.collections[md5]['start_time'] == None:
-                    if handicap in userConfig.RULE_FULL['initial_handicaps']:
-                        odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
-                                   odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
-
-                        if odds_ok:
-                            self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
-                        else:
-                            self.collections.pop(md5)
-                            continue
-                    else:
-                        self.collections.pop(md5)
-                        continue
+                    # if handicap in userConfig.RULE_FULL['initial_handicaps']:
+                    #     odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
+                    #                odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
+                    #
+                    #     if odds_ok:
+                    #         self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
+                    #     else:
+                    #         self.collections.pop(md5)
+                    #         continue
+                    # else:
+                    #     self.collections.pop(md5)
+                    #     continue
 
                     self.collections[md5]['start_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                     if (self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])):
@@ -204,7 +212,6 @@ class Bet365Full(Bet365):
                 print_need = True
 
                 #是否是下半场
-                #print('{}'.format(names))
                 if self.collections[md5]['next_half'] == False:
                     continue
 
@@ -243,7 +250,7 @@ class Bet365Full(Bet365):
 
                 #判断两队进球比分相差是否小于等于1
                 parties_goals_minus_min = infos_all.get('parties_goals_minus_min', -1)
-                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) <= parties_goals_minus_min:
+                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) < parties_goals_minus_min:
                     print('{}, parties_goals_minus_ok=no'.format(names))
                     continue
 

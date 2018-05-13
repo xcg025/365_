@@ -198,6 +198,14 @@ class Bet365Half(Bet365):
                     print('{}, goal_cancel_ok=no'.format(names))
                     continue
 
+                # 是否存在 X:0或0:X的情况
+                one_party_zero = infos_all.get('one_party_zero', False)
+                goal_a, goal_b = int(score.split(':')[0]), int(score.split(':')[1])
+                if one_party_zero and (goal_a * goal_b != 0):
+                    self.collections.pop(md5)
+                    continue
+
+
                 #各个进球时间是否满足条件
                 all_goal_times_dict = infos_all.get('all_goal_times', None)
                 all_goal_times_ok = True
@@ -209,28 +217,6 @@ class Bet365Half(Bet365):
                             break
                 if all_goal_times_ok == False:
                     continue
-
-
-
-                # #是否存在 X:0或0:X的情况
-                # goal_a, goal_b = int(score.split(':')[0]), int(score.split(':')[1])
-                # allow_one_party_no_goal = infos[all_goals]['allow_one_party_no_goal']
-                # if (allow_one_party_no_goal == False) and (goal_a == 0 or goal_b == 0):
-                #     self.collections.pop(md5)
-                #     continue
-
-                # # 最近进球时间是否满足条件
-                # latest_goal_times = infos_all.get('latest_goal_times', None)
-                # if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:
-                #     print('{}, last_goal_time_ok=no'.format(names))
-                #     continue
-                #
-                # #第一个进球时间是否满足条件
-                # first_goal_times = infos_all.get('first_goal_times', None)
-                # if first_goal_times and self.min_max_condition(first_goal_times, float(goals_time[0])) == False:
-                #     print('{}, first_goal_time_ok=no'.format(names))
-                #     continue
-
 
 
                 #---------------------以下代码可以不动------------------------
