@@ -1,1 +1,1 @@
-python bet365_full.py
+python bet365_half.py
