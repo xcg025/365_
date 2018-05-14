@@ -50,19 +50,19 @@ class Bet365Full(Bet365):
                 odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
                            odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
 
-            sorted_ratio = sorted(ratios)
-            ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
-                         sorted_ratio[0] <= userConfig.RULE_FULL['initial_ratios']['weak']['max']) and \
-                        (sorted_ratio[1] >= userConfig.RULE_FULL['initial_ratios']['strong']['min'] and \
-                         sorted_ratio[1] <= userConfig.RULE_FULL['initial_ratios']['strong']['max'])
+            # sorted_ratio = sorted(ratios)
+            # ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
+            #              sorted_ratio[0] <= userConfig.RULE_FULL['initial_ratios']['weak']['max']) and \
+            #             (sorted_ratio[1] >= userConfig.RULE_FULL['initial_ratios']['strong']['min'] and \
+            #              sorted_ratio[1] <= userConfig.RULE_FULL['initial_ratios']['strong']['max'])
 
-            if time_ok and odds_ok and ratios_ok :
+            if time_ok and odds_ok:
                 matchDict = {
                     'parties_name': names,
                     'score': score,
                     'goals_time': [],
                     'interval_goals_time':[],
-                    'times_betteds': {'3':False, '4':False},
+                    'times_betteds': {'3':False, '4':False, '2':False},
                     'full_handicap': handicap,
                     'full_handicap_odds': odds,
                     'play_time': 0.0,
@@ -94,18 +94,19 @@ class Bet365Full(Bet365):
             if md5 in self.collections.keys() and time_now != 0:
                 # 更新比赛开始的时间且加入数据库
                 if self.collections[md5]['start_time'] == None:
-                    # if handicap in userConfig.RULE_FULL['initial_handicaps']:
-                    #     odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
-                    #                odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
-                    #
-                    #     if odds_ok:
-                    #         self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
-                    #     else:
-                    #         self.collections.pop(md5)
-                    #         continue
-                    # else:
-                    #     self.collections.pop(md5)
-                    #     continue
+                    if handicap in userConfig.RULE_FULL['initial_handicaps']:
+                        odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
+                                   odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
+
+                        if odds_ok:
+                            pass
+                            # self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
+                        else:
+                            self.collections.pop(md5)
+                            continue
+                    else:
+                        self.collections.pop(md5)
+                        continue
 
                     self.collections[md5]['start_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                     if (self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])):
@@ -216,16 +217,15 @@ class Bet365Full(Bet365):
                     continue
 
                 #进球数是否满足条件
-                next_half_all_goals = self.collections[md5]['next_half_all_goals']
                 next_half_arleady_goals_dict = userConfig.RULE_FULL['all_bets_info']['next_half_arleady_goals']
-                qualified_goals = next_half_all_goals
-                if qualified_goals not in next_half_arleady_goals_dict:
+                next_half_arleady_goals = self.collections[md5]['next_half_all_goals']
+                infos_all = next_half_arleady_goals_dict.get(next_half_arleady_goals, None)
+                if infos_all == None:
                     #self.collections.pop(md5)
                     continue
 
                 last_half_all_goals = self.collections[md5]['last_half_all_goals']
                 goals_time = self.collections[md5]['goals_time']
-                infos_all =next_half_arleady_goals_dict[qualified_goals]
 
                 # 上半场进球是否满足条件
                 last_half_goals = infos_all.get('last_half_goals', None)
