@@ -216,13 +216,16 @@ class Bet365Full(Bet365):
                     continue
 
                 #进球数是否满足条件
-                if all_goals not in userConfig.RULE_FULL['all_bets_info']['arleady_goals']:
+                next_half_all_goals = self.collections[md5]['next_half_all_goals']
+                next_half_arleady_goals_dict = userConfig.RULE_FULL['all_bets_info']['next_half_arleady_goals']
+                qualified_goals = next_half_all_goals
+                if qualified_goals not in next_half_arleady_goals_dict:
                     #self.collections.pop(md5)
                     continue
 
                 last_half_all_goals = self.collections[md5]['last_half_all_goals']
                 goals_time = self.collections[md5]['goals_time']
-                infos_all = userConfig.RULE_FULL['all_bets_info']['arleady_goals'][all_goals]
+                infos_all =next_half_arleady_goals_dict[qualified_goals]
 
                 # 上半场进球是否满足条件
                 last_half_goals = infos_all.get('last_half_goals', None)
