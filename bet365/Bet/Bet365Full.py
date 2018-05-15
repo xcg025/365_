@@ -224,11 +224,11 @@ class Bet365Full(Bet365):
                     #self.collections.pop(md5)
                     continue
 
-                last_half_all_goals = self.collections[md5]['last_half_all_goals']
                 goals_time = self.collections[md5]['goals_time']
 
                 # 上半场进球是否满足条件
                 last_half_goals = infos_all.get('last_half_goals', None)
+                last_half_all_goals = self.collections[md5]['last_half_all_goals']
                 if last_half_goals and self.min_max_condition(last_half_goals, last_half_all_goals) == False:
                     print('{}, last_half_goals_ok-->no'.format(names))
                     continue
