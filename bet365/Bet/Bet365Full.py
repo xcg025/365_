@@ -217,9 +217,9 @@ class Bet365Full(Bet365):
                     continue
 
                 #进球数是否满足条件
-                next_half_arleady_goals_dict = userConfig.RULE_FULL['all_bets_info']['next_half_arleady_goals']
-                next_half_arleady_goals = self.collections[md5]['next_half_all_goals']
-                infos_all = next_half_arleady_goals_dict.get(next_half_arleady_goals, None)
+                arleady_goals_dict = userConfig.RULE_FULL['all_bets_info']['already_goals']
+                # next_half_arleady_goals = self.collections[md5]['next_half_all_goals']
+                infos_all = arleady_goals_dict.get(all_goals, None)
                 if infos_all == None:
                     #self.collections.pop(md5)
                     continue
@@ -258,30 +258,30 @@ class Bet365Full(Bet365):
                     continue
 
 
-                #附加条件
-                last_half_goals_info = infos_all.get('when_last_half_goals', None)
-                if last_half_goals_info and last_half_all_goals in last_half_goals_info:
-                    the_last_half_goals_info = last_half_goals_info[last_half_all_goals]
-                    half_last_goal_time_min = the_last_half_goals_info.get('half_last_goal_time_min', None)
-                    if half_last_goal_time_min:
-                        half_last_goal_time = float(goals_time[last_half_all_goals-1])
-                        if half_last_goal_time < half_last_goal_time_min:
-                            print('{}, half_last_goal_time_ok=no'.format(names))
-                            continue
-
-                    half_first_goal_time_max = the_last_half_goals_info.get('half_first_goal_time_max', None)
-                    if half_first_goal_time_max:
-                        half_first_goal_time = float(goals_time[0])
-                        if half_first_goal_time > half_first_goal_time_max:
-                            print('{}, half_first_goal_time_ok=no'.format(names))
-                            continue
-
-                    next_last_two_interval_min = the_last_half_goals_info.get('next_last_two_interval_min', None)
-                    if next_last_two_interval_min:
-                        next_last_two_interval = abs(float(goals_time[-1]) - float(goals_time[-2]))
-                        if next_last_two_interval < next_last_two_interval_min:
-                            print('{}, next_last_two_interval_ok=no'.format(names))
-                            continue
+                # #附加条件
+                # last_half_goals_info = infos_all.get('when_last_half_goals', None)
+                # if last_half_goals_info and last_half_all_goals in last_half_goals_info:
+                #     the_last_half_goals_info = last_half_goals_info[last_half_all_goals]
+                #     half_last_goal_time_min = the_last_half_goals_info.get('half_last_goal_time_min', None)
+                #     if half_last_goal_time_min:
+                #         half_last_goal_time = float(goals_time[last_half_all_goals-1])
+                #         if half_last_goal_time < half_last_goal_time_min:
+                #             print('{}, half_last_goal_time_ok=no'.format(names))
+                #             continue
+                #
+                #     half_first_goal_time_max = the_last_half_goals_info.get('half_first_goal_time_max', None)
+                #     if half_first_goal_time_max:
+                #         half_first_goal_time = float(goals_time[0])
+                #         if half_first_goal_time > half_first_goal_time_max:
+                #             print('{}, half_first_goal_time_ok=no'.format(names))
+                #             continue
+                #
+                #     next_last_two_interval_min = the_last_half_goals_info.get('next_last_two_interval_min', None)
+                #     if next_last_two_interval_min:
+                #         next_last_two_interval = abs(float(goals_time[-1]) - float(goals_time[-2]))
+                #         if next_last_two_interval < next_last_two_interval_min:
+                #             print('{}, next_last_two_interval_ok=no'.format(names))
+                #             continue
 
                 # 投注的进球数是否满足条件
                 handicap_now_ok = (handicap != None and isinstance(handicap, str) and "," not in handicap and ((float(handicap) > all_goals) and (float(handicap) < all_goals + 1)))

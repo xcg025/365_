@@ -33,16 +33,16 @@ ForbiddenMatches_Full = ['80分钟',]
 
 RULE_FULL = {
     # 'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75 , 'max': 2.5}},   #3.0---->3.75
-    'initial_handicaps': { '3.5': {'min': 1.75 , 'max': 2.5}},   #3.25---->3.75
+    # 'initial_handicaps': { '3.5': {'min': 1.825 , 'max': 2.5}},   #3.25---->3.5
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},
-    # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
+    'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,
     'initial_minutes': {'min': 0, 'max': 0},
     'half_time': 45,
     'full_time': 90,
     'quick_goal_interval': 4.30,
     'all_bets_info': {
-        'next_half_arleady_goals': {
-            3: { 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 45, 'max': 78}, 'parties_goals_minus_min': 2,
+        'already_goals': {
+            3: { 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 0, 'max': 76}, 'parties_goals_minus_min': 3,
                 # 'when_last_half_goals': {
                 #     3: {'half_first_goal_time_max': 26, 'half_last_goal_time_min': 26,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
                 #     4: {'half_last_goal_time_min': 30,},# 上半场3个进球，则第3个进球时间必须大于30分钟且下半场两个进球间隔必须大于10分钟
