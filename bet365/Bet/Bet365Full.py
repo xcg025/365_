@@ -218,7 +218,6 @@ class Bet365Full(Bet365):
 
                 #进球数是否满足条件
                 arleady_goals_dict = userConfig.RULE_FULL['all_bets_info']['already_goals']
-                # next_half_arleady_goals = self.collections[md5]['next_half_all_goals']
                 infos_all = arleady_goals_dict.get(all_goals, None)
                 if infos_all == None:
                     #self.collections.pop(md5)
@@ -255,7 +254,7 @@ class Bet365Full(Bet365):
                 two_goals_interval_min = infos_all.get('two_goals_interval_min', -1)
                 quick_goal_num = 0
                 if two_goals_interval_min != -1:
-                    for time_index in range(0, goals_time.count-1):
+                    for time_index in range(0, len(goals_time)-1):
                         if (time_index != goals_time.count - 1) and (goals_time[time_index+1]-goals_time[time_index]) < two_goals_interval_min:
                             quick_goal_num += 1
 

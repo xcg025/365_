@@ -49,8 +49,7 @@ RULE_FULL = {
                  'two_goals_interval_min': 5, 'allow_quick_goal_num':0,},
 
             5: { 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 60, 'max': 80}, 'last_half_goals': {'min': 1, 'max': 3},
-                 'two_goals_interval_min': 4, 'allow_quick_goal_num':1,
-                },
+                 'two_goals_interval_min': 4, 'allow_quick_goal_num':1,},
         },
         'ready_bets':{
             '2':{'obey_any_success': True },
