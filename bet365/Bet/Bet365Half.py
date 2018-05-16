@@ -223,7 +223,6 @@ class Bet365Half(Bet365):
                 if all_goal_times_ok == False:
                     continue
 
-
                 #---------------------以下代码可以不动------------------------
                 # 投注的进球数是否满足条件
                 handicap_now_ok = (handicap != None and isinstance(handicap, str) and "," not in handicap and ((float(handicap) > all_goals) and (float(handicap) < all_goals + 1)))
