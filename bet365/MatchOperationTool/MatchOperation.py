@@ -21,6 +21,13 @@ class MatchOperation(object):
         if notNowBtn != None:
             cls.browser.click3Element(notNowBtn)
 
+    #关闭保持登录
+    @classmethod
+    def closeRemain(cls):
+        remainBtn = cls.browser.element(ByType.CSS_SELECTOR, '.wl-InactivityAlert_Remain')
+        if remainBtn != None:
+            cls.browser.click3Element(remainBtn)
+
     # 刷新money
     @classmethod
     def refreshMoney(cls):

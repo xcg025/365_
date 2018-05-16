@@ -257,6 +257,21 @@ class Bet365Full(Bet365):
                     print('{}, parties_goals_minus_ok=no'.format(names))
                     continue
 
+                #两球之间的间隔最小值
+                two_goals_interval_min = infos_all.get('two_goals_interval_min', -1)
+                two_goals_interval_min_ok = True
+                if two_goals_interval_min != -1:
+                    for time_index in range(0, goals_time.count-1):
+                        if (time_index != goals_time.count - 1) and (goals_time[time_index+1]-goals_time[time_index]) < two_goals_interval_min:
+                            two_goals_interval_min_ok = False
+                            break
+                if two_goals_interval_min_ok == False:
+                    print('{}, two_goals_interval_min_ok=no'.format(names))
+                    continue
+
+
+
+
 
                 # #附加条件
                 # last_half_goals_info = infos_all.get('when_last_half_goals', None)

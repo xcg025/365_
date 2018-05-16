@@ -21,7 +21,6 @@ class Bet365Half(Bet365):
         print('目前进行的比赛数目为：', self.all)
         print('目前收藏的比赛数目为：', len(self.collections))
 
-
         self.runnings.clear()
         self.runnings = {key: False for key in self.collections.keys()}
 

@@ -23,6 +23,7 @@ class BetSpider(object):
                 print('matchesProcess is running..., and time is %s' % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
                 if MatchOperation.isGamesLiveClosed() == False:
                     MatchOperation.closeGamesLive()
+                MatchOperation.closeRemain()
 
                 if MatchOperation.hasFootball() == False:
                     print('matchesProcess has no football games')
