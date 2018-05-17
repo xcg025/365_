@@ -271,13 +271,17 @@ class Bet365Full(Bet365):
                 if when_last_half_goals_dict and last_half_all_goals in when_last_half_goals_dict:
                     when_last_half_goals_info = when_last_half_goals_dict[last_half_all_goals]
 
-                    #下半场第一个进球是否满足条件
-                    next_half_first_goal_time_max = when_last_half_goals_info.get('next_half_first_goal_time_max', -1)
-                    if next_half_first_goal_time_max != -1:
-                        next_half_first_goal_time = float(goals_time[last_half_all_goals])
-                        if next_half_first_goal_time > next_half_first_goal_time_max:
-                            print('{}, next_half_first_goal_time_ok=no'.format(names))
-                            continue
+                    # 各个进球时间是否满足条件
+                    all_goal_times_dict = when_last_half_goals_info.get('all_goal_times', None)
+                    all_goal_times_ok = True
+                    if all_goal_times_dict:
+                        for goal_num, times in all_goal_times_dict.items():
+                            if self.min_max_condition(times, float(goals_time[goal_num - 1])) == False:
+                                all_goal_times_ok = False
+                                print('{}, {}_goal_time_ok=no'.format(names, goal_num))
+                                break
+                    if all_goal_times_ok == False:
+                        continue
 
 
 
