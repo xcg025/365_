@@ -240,6 +240,13 @@ class Bet365Full(Bet365):
                     self.collections.pop(md5)
                     continue
 
+                # 是否存在 X:0或0:X的情况
+                one_party_zero_allow = infos_all.get('one_party_zero_allow', True)
+                goal_a, goal_b = int(score.split(':')[0]), int(score.split(':')[1])
+                if one_party_zero_allow == False and (goal_a * goal_b == 0):
+                    self.collections.pop(md5)
+                    continue
+
                 # 最近进球时间是否满足条件
                 latest_goal_times = infos_all.get('latest_goal_times', None)
                 if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:

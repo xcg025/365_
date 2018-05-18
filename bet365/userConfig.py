@@ -42,26 +42,32 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            3: {'goal_cancel_forbidden': True, 'latest_goal_times': {'min': 70, 'max': 81}, 'last_half_goals': {'min': 0, 'max': 0},
-                'parties_goals_minus_min': 3,'two_goals_interval_min': 5.30, 'allow_quick_goal_num':0},
+            # 3: {'goal_cancel_forbidden': True, 'latest_goal_times': {'min': 70, 'max': 81}, 'last_half_goals': {'min': 0, 'max': 0},
+            #     'parties_goals_minus_min': 3,'two_goals_interval_min': 5.30, 'allow_quick_goal_num':0},
 
-            4: { 'goal_cancel_forbidden':True,  'latest_goal_times': {'min': 70, 'max': 81}, 'last_half_goals': {'min': 1, 'max': 1},
-                 'two_goals_interval_min': 5, 'allow_quick_goal_num':0, 'parties_goals_minus_min': 1},
-
-            5: { 'goal_cancel_forbidden':True,  'last_half_goals': {'min': 3, 'max': 3},
+            4: { 'last_half_goals': {'min': 3, 'max': 3},  'one_party_zero_allow':False,
                  'when_last_half_goals':{
-                     2:{ 'all_goal_times': {
-                            3: {'min': 45, 'max': 55},
-                            5: {'min': 69, 'max': 77},
-                          }
-                     },
                      3:{
                          'all_goal_times': {
-                            4: {'min': 45, 'max': 59},
-                            5: {'min': 59, 'max': 77},
+                            3: {'min': 45, 'max': 60},
                           }
-                     },
+                     }
                  }},
+
+            # 5: { 'goal_cancel_forbidden':True,  'last_half_goals': {'min': 3, 'max': 3},
+            #      'when_last_half_goals':{
+            #          2:{ 'all_goal_times': {
+            #                 3: {'min': 45, 'max': 55},
+            #                 5: {'min': 69, 'max': 77},
+            #               }
+            #          },
+            #          3:{
+            #              'all_goal_times': {
+            #                 4: {'min': 45, 'max': 59},
+            #                 5: {'min': 59, 'max': 77},
+            #               }
+            #          },
+            #      }},
         },
         'ready_bets':{
             '2':{'obey_any_success': True },
