@@ -45,11 +45,11 @@ RULE_FULL = {
             # 3: {'goal_cancel_forbidden': True, 'latest_goal_times': {'min': 70, 'max': 81}, 'last_half_goals': {'min': 0, 'max': 0},
             #     'parties_goals_minus_min': 3,'two_goals_interval_min': 5.30, 'allow_quick_goal_num':0},
 
-            4: { 'last_half_goals': {'min': 3, 'max': 3},  'one_party_zero_allow':False,
+            4: { 'goal_cancel_forbidden': True, 'last_half_goals': {'min': 3, 'max': 3},  'one_party_zero_allow':False,
                  'when_last_half_goals':{
                      3:{
                          'all_goal_times': {
-                            3: {'min': 45, 'max': 60},
+                            4: {'min': 45, 'max': 60},
                           }
                      }
                  }},
