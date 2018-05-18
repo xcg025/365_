@@ -23,8 +23,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟',]
 ForbiddenMatches_Half = ['80分钟',]
 
-ForbiddenLeagues_Full = ['80分钟']
-ForbiddenMatches_Full = ['80分钟']
+ForbiddenLeagues_Full = ['80分钟', '女', '19']
+ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 # full_lgt_min = 45
 # full_lgt_max = 75
