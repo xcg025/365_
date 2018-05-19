@@ -55,12 +55,20 @@ RULE_FULL = {
             #                 4: {'min': 45, 'max': 63},
             #               }
             #          }
-            #      }},
+            #      }
+            # },
 
-            5: { 'last_half_goals': {'min': 1, 'max': 4}, 'latest_goal_times': {'min': 45, 'max': 80},
+            5: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 1, 'max': 4}, 'latest_goal_times': {'min': 45, 'max': 80},
                  'parties_goals_minus':{'min': 3, 'max': 3}, 'one_party_zero_allow':False,
+                'when_last_half_goals': {
+                    3: {
+                        'all_goal_times': {
+                            1: {'min': 0, 'max': 35},
+                        }
+                    }
+                }
                  },
-            6: { 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 45, 'max': 75},
+            6: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 45, 'max': 75},
                  'parties_goals_minus':{'min': 2, 'max': 4}, 'one_party_zero_allow':False,
                  },
         },
