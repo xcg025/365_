@@ -196,8 +196,8 @@ class Bet365Half(Bet365):
                 two_goals_interval_min = infos_all.get('two_goals_interval_min', -1)
                 quick_goal_num = 0
                 if two_goals_interval_min != -1:
-                    for time_index in range(0, goals_time.count - 1):
-                        if (time_index != goals_time.count - 1) and (goals_time[time_index + 1] - goals_time[time_index]) < two_goals_interval_min:
+                    for time_index in range(0, len(goals_time)):
+                        if (time_index != len(goals_time) - 1) and (goals_time[time_index + 1] - goals_time[time_index]) < two_goals_interval_min:
                             quick_goal_num += 1
 
                 allow_quick_goal_num = infos_all.get('allow_quick_goal_num', -1)
