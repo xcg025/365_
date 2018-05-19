@@ -23,8 +23,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟',]
 ForbiddenMatches_Half = ['80分钟',]
 
-ForbiddenLeagues_Full = ['80分钟', '女', '19']
-ForbiddenMatches_Full = ['80分钟', '女', '19']
+ForbiddenLeagues_Full = ['80分钟',]
+ForbiddenMatches_Full = ['80分钟',]
 
 # full_lgt_min = 45
 # full_lgt_max = 75
@@ -32,10 +32,12 @@ ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 
 RULE_FULL = {
+    # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,  #1---->2.75
     # 'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75 , 'max': 2.5}},   #3.0---->3.75
     # 'initial_handicaps': { '3.5': {'min': 1.825 , 'max': 2.5}},   #3.25---->3.5
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.825 , 'max': 2.5}},   #3.0---->3.5
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},
-    'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,  #1---->2.75
+
     'initial_minutes': {'min': 0, 'max': 0},
     'half_time': 45,
     'full_time': 90,
@@ -45,30 +47,22 @@ RULE_FULL = {
             # 3: {'goal_cancel_forbidden': True, 'latest_goal_times': {'min': 70, 'max': 80}, 'last_half_goals': {'min': 0, 'max': 0},
             #     'parties_goals_minus_min': 3,'two_goals_interval_min': 5.30, 'allow_quick_goal_num':0},
 
-            4: { 'goal_cancel_forbidden': True, 'last_half_goals': {'min': 3, 'max': 3},  'one_party_zero_allow':False,
-                 'when_last_half_goals':{
-                     3:{
-                         'all_goal_times': {
-                            1: {'min': 0, 'max': 25},
-                            4: {'min': 45, 'max': 63},
-                          }
-                     }
-                 }},
-
-            # 5: { 'goal_cancel_forbidden':True,  'last_half_goals': {'min': 3, 'max': 3},
+            # 4: { 'goal_cancel_forbidden': True, 'last_half_goals': {'min': 3, 'max': 3},  'one_party_zero_allow':False,
             #      'when_last_half_goals':{
-            #          2:{ 'all_goal_times': {
-            #                 3: {'min': 45, 'max': 55},
-            #                 5: {'min': 69, 'max': 77},
-            #               }
-            #          },
             #          3:{
             #              'all_goal_times': {
-            #                 4: {'min': 45, 'max': 59},
-            #                 5: {'min': 59, 'max': 77},
+            #                 1: {'min': 0, 'max': 25},
+            #                 4: {'min': 45, 'max': 63},
             #               }
-            #          },
+            #          }
             #      }},
+
+            5: { 'last_half_goals': {'min': 1, 'max': 4}, 'latest_goal_times': {'min': 45, 'max': 80},
+                 'parties_goals_minus':{'min': 3, 'max': 3}, 'one_party_zero_allow':False,
+                 },
+            6: { 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 45, 'max': 75},
+                 'parties_goals_minus':{'min': 2, 'max': 4}, 'one_party_zero_allow':False,
+                 },
         },
         'ready_bets':{
             '2':{'obey_any_success': True },

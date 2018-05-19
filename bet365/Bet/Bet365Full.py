@@ -226,9 +226,9 @@ class Bet365Full(Bet365):
                 goals_time = self.collections[md5]['goals_time']
 
                 # 上半场进球是否满足条件
-                last_half_goals = infos_all.get('last_half_goals', -1)
+                last_half_goals_dict = infos_all.get('last_half_goals', None)
                 last_half_all_goals = self.collections[md5]['last_half_all_goals']
-                if last_half_goals != -1 and self.min_max_condition(last_half_goals, last_half_all_goals) == False:
+                if last_half_goals_dict != None and self.min_max_condition(last_half_goals_dict, last_half_all_goals) == False:
                     # print('{}, last_half_goals_ok-->no'.format(names))
                     self.collections.pop(md5)
                     continue
@@ -248,14 +248,15 @@ class Bet365Full(Bet365):
                     continue
 
                 # 最近进球时间是否满足条件
-                latest_goal_times = infos_all.get('latest_goal_times', None)
-                if latest_goal_times and self.min_max_condition(latest_goal_times, float(goals_time[-1])) == False:
+                latest_goal_times_dict = infos_all.get('latest_goal_times', None)
+                if latest_goal_times_dict and self.min_max_condition(latest_goal_times_dict, float(goals_time[-1])) == False:
                     print('{}, latest_goal_time_ok=no'.format(names))
                     continue
 
                 #判断两队进球比分相差是否小于x
-                parties_goals_minus_min = infos_all.get('parties_goals_minus_min', -1)
-                if parties_goals_minus_min != -1 and abs(int(score.split(':')[0])-int(score.split(':')[1])) < parties_goals_minus_min:
+                parties_goals_minus_dict = infos_all.get('parties_goals_minus', None)
+                parties_goals_minus = abs(int(score.split(':')[0])-int(score.split(':')[1]))
+                if parties_goals_minus_dict != None and self.min_max_condition(parties_goals_minus_dict, parties_goals_minus) == False:
                     print('{}, parties_goals_minus_ok=no'.format(names))
                     continue
 
