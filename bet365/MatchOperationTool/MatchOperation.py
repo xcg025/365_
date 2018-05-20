@@ -28,6 +28,12 @@ class MatchOperation(object):
         if remainBtn != None:
             cls.browser.click3Element(remainBtn)
 
+    @classmethod
+    def closeRemain1(cls):
+        remainBtn = cls.browser.element(ByType.CSS_SELECTOR, '.wl-ActivityLimitAlert_Button')
+        if remainBtn != None:
+            cls.browser.click3Element(remainBtn)
+
     # 刷新money
     @classmethod
     def refreshMoney(cls):

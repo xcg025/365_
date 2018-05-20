@@ -24,6 +24,7 @@ class BetSpider(object):
                 if MatchOperation.isGamesLiveClosed() == False:
                     MatchOperation.closeGamesLive()
                 MatchOperation.closeRemain()
+                MatchOperation.closeRemain1()
 
                 if MatchOperation.hasFootball() == False:
                     print('matchesProcess has no football games')
