@@ -57,7 +57,7 @@ RULE_FULL = {
                     3: {
                         'all_goal_times': {
                             4: {'min': 45, 'max': 55},
-                            5: {'min': 65, 'max': 75},
+                            5: {'min': 70, 'max': 75},
                         }
                     }
                 }
