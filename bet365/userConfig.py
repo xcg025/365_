@@ -49,10 +49,10 @@ RULE_FULL = {
                 'when_last_half_goals': {
                     2: {
                         'all_goal_times': {
+                            3: {'min': 45, 'max': 65},
+                            4: {'min': 55, 'max': 70},
                             5: {'min': 70, 'max': 78},
                         },
-                        'two_goals_interval_min': 4,
-                        'next_half_allow_quick_goal_num':1,
                     },
                     3: {
                         'all_goal_times': {
