@@ -62,7 +62,7 @@ class Bet365Full(Bet365):
                     'score': score,
                     'goals_time': [],
                     'interval_goals_time':[],
-                    'times_betteds': {'3':False, '4':False, '5':False},
+                    'times_betteds': {'3':False, '4':False,},
                     'full_handicap': handicap,
                     'full_handicap_odds': odds,
                     'play_time': 0.0,
