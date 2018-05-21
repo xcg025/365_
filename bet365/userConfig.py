@@ -61,16 +61,22 @@ RULE_FULL = {
             5: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 2, 'max': 4}, 'latest_goal_times': {'min': 45, 'max': 80},
                  'parties_goals_minus':{'min': 3, 'max': 3}, 'one_party_zero_allow':False,
                 'when_last_half_goals': {
+                    2: {
+                        'all_goal_times': {
+                            3: {'min': 45, 'max': 53},
+                        }
+                    },
                     3: {
                         'all_goal_times': {
                             3: {'min': 20, 'max': 45},
+                            4: {'min': 45, 'max': 53},
                         }
                     }
                 }
                  },
-            6: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 45, 'max': 75},
-                 'parties_goals_minus':{'min': 2, 'max': 4}, 'one_party_zero_allow':False,
-                 },
+            # 6: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 45, 'max': 75},
+            #      'parties_goals_minus':{'min': 2, 'max': 4}, 'one_party_zero_allow':False,
+            #      },
         },
         'ready_bets':{
             '2':{'obey_any_success': True },
