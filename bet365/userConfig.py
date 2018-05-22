@@ -45,7 +45,7 @@ RULE_FULL = {
     'all_bets_info': {
         'already_goals': {
             4: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 3, 'max': 4}, 'latest_goal_times': {'min': 0, 'max': 90},
-                'one_party_zero_allow':False,'all_parties_goals_minus':{'min': 1, 'max': 2},
+                'one_party_zero_allow':False,'all_parties_goals_minus':{'min': 2, 'max': 2},
                 'when_last_half_goals': {
                     3: {
                         'all_goal_times': {
