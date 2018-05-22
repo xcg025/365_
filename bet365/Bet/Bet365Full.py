@@ -226,14 +226,16 @@ class Bet365Full(Bet365):
                     continue
 
                 goals_time = self.collections[md5]['goals_time']
+                last_half_all_goals = self.collections[md5]['last_half_all_goals']
+                last_half_score = self.collections[md5]['last_half_score']
 
                 # 上半场进球是否满足条件
-                last_half_goals_dict = infos_all.get('last_half_goals', None)
-                last_half_all_goals = self.collections[md5]['last_half_all_goals']
-                if last_half_goals_dict != None and self.min_max_condition(last_half_goals_dict, last_half_all_goals) == False:
-                    # print('{}, last_half_goals_ok-->no'.format(names))
-                    self.collections.pop(md5)
-                    continue
+                last_half_goals_all = infos_all.get('last_half_goals', None)
+                if last_half_goals_all != None:
+                    if (isinstance(last_half_goals_all, dict) and self.min_max_condition(last_half_goals_all, last_half_all_goals) == False) or \
+                       (isinstance(last_half_goals_all, list) and last_half_all_goals not in last_half_goals_all):
+                        self.collections.pop(md5)
+                        continue
 
                 # 是否有球取消
                 goal_cancel_forbidden = infos_all.get('goal_cancel_forbidden', False)
@@ -295,10 +297,16 @@ class Bet365Full(Bet365):
 
                     #上半场两队进球比分相差是否小于x
                     last_half_parties_goals_minus_dict = when_last_half_goals_info.get('last_half_parties_goals_minus', None)
-                    last_half_score = self.collections[md5]['last_half_score']
                     last_half_parties_goals_minus = abs(int(last_half_score.split(':')[0]) - int(last_half_score.split(':')[1]))
                     if last_half_parties_goals_minus_dict != None and self.min_max_condition(last_half_parties_goals_minus_dict, last_half_parties_goals_minus) == False:
                         print('{}, last_half_parties_goals_minus_ok=no'.format(names))
+                        continue
+
+                    # 当前两队进球比分相差是否小于x
+                    now_parties_goals_minus_dict = when_last_half_goals_info.get('now_parties_goals_minus', None)
+                    now_parties_goals_minus = abs(int(score.split(':')[0]) - int(score.split(':')[1]))
+                    if now_parties_goals_minus_dict != None and self.min_max_condition(now_parties_goals_minus_dict, now_parties_goals_minus) == False:
+                        print('{}, now_parties_goals_minus_ok=no'.format(names))
                         continue
 
 
