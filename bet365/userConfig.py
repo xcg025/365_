@@ -58,7 +58,7 @@ RULE_FULL = {
                 }
             },
 
-            5: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 4, 'max': 5}, 'latest_goal_times': {'min': 0, 'max': 90},
+            5: {'goal_cancel_forbidden': True, 'last_half_goals': {'min': 4, 'max': 4}, 'latest_goal_times': {'min': 0, 'max': 90},
                 'one_party_zero_allow':False,
                 'when_last_half_goals': {
                     4: {
