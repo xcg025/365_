@@ -302,29 +302,6 @@ class Bet365Full(Bet365):
                         continue
 
 
-
-
-                    # half_last_goal_time_min = the_last_half_goals_info.get('half_last_goal_time_min', None)
-                    # if half_last_goal_time_min:
-                    #     half_last_goal_time = float(goals_time[last_half_all_goals-1])
-                    #     if half_last_goal_time < half_last_goal_time_min:
-                    #         print('{}, half_last_goal_time_ok=no'.format(names))
-                    #         continue
-                #
-                #     half_first_goal_time_max = the_last_half_goals_info.get('half_first_goal_time_max', None)
-                #     if half_first_goal_time_max:
-                #         half_first_goal_time = float(goals_time[0])
-                #         if half_first_goal_time > half_first_goal_time_max:
-                #             print('{}, half_first_goal_time_ok=no'.format(names))
-                #             continue
-                #
-                #     next_last_two_interval_min = the_last_half_goals_info.get('next_last_two_interval_min', None)
-                #     if next_last_two_interval_min:
-                #         next_last_two_interval = abs(float(goals_time[-1]) - float(goals_time[-2]))
-                #         if next_last_two_interval < next_last_two_interval_min:
-                #             print('{}, next_last_two_interval_ok=no'.format(names))
-                #             continue
-
                 # 投注的进球数是否满足条件
                 handicap_now_ok = (handicap != None and isinstance(handicap, str) and "," not in handicap and ((float(handicap) > all_goals) and (float(handicap) < all_goals + 1)))
                 if handicap_now_ok == False:
