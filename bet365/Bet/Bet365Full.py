@@ -261,7 +261,7 @@ class Bet365Full(Bet365):
                 parties_goals_minus_dict = infos_all.get('all_parties_goals_minus', None)
                 all_parties_goals_minus = abs(int(score.split(':')[0])-int(score.split(':')[1]))
                 if parties_goals_minus_dict != None and self.min_max_condition(parties_goals_minus_dict, all_parties_goals_minus) == False:
-                    print('{}, parties_goals_minus_ok=no'.format(names))
+                    print('{}, all_parties_goals_minus_ok=no'.format(names))
                     continue
 
                 #判断最快进球数
