@@ -60,13 +60,13 @@ RULE_FULL = {
 
             5: {'goal_cancel_forbidden': True, 'last_half_goals':[2, 4] , 'latest_goal_times': {'min': 45, 'max': 81},
                 'one_party_zero_allow':False, 'all_parties_goals_minus':{'min': 3, 'max': 3},
-                # 'when_last_half_goals': {
-                #     4: {
-                #         'all_goal_times': {
-                #             5: {'min': 45, 'max': 60},
-                #         },
-                #     },
-                # }
+                'when_last_half_goals': {
+                    4: {
+                        'all_goal_times': {
+                            5: {'min': 53, 'max': 81},
+                        },
+                    },
+                }
             },
         },
         'ready_bets':{
