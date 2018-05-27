@@ -63,7 +63,7 @@ class Bet365(object):
             bet_hint = '下之，times={}, rmb={}'.format(times, money_bet)
             if save_ok and update_ok:
                 Logging.info('{}---{}'.format(bet_hint, self.collections[md5]))
-                Mail.send(bet_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
+                # Mail.send(bet_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
 
             #关闭弹出来的设置
             MatchOperation.closeNotNow()
