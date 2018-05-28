@@ -346,10 +346,12 @@ class Bet365Full(Bet365):
                 betted_lose = False
                 lose_hint = '失之, '
                 win_hint = '得之,'
+                is_betted = False
                 already_goals = self.collections[md5_key]['all_goals']
                 win_goals = self.collections[md5_key]['win_goals']
                 for (times, betted) in self.collections[md5_key]['times_betteds'].items():
                     if betted == True:
+                        is_betted = True
                         if already_goals < win_goals:
                             self.balance.lose(times)
                             betted_lose = True
@@ -360,7 +362,7 @@ class Bet365Full(Bet365):
                             win_hint = win_hint + times + ' '
 
                 delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5_key])
-                if delete_ok:
+                if delete_ok and is_betted == True:
                     if betted_lose == True:
                         Mail.send(lose_hint, json.dumps(self.collections[md5_key]['parties_name'], ensure_ascii=False))
                     else:
