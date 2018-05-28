@@ -35,28 +35,43 @@ class Balance(object):
     #赢
     def win(self, times):
         data = self.balance['cash'][times]
-        data['now'] += (data['original']*data['ratio']*(float(times)-1))
+        if 'ratios' in data:
+            data['now'] += (data['original'] * data['ratios'][data['lose_num']] * (float(times) - 1))
+            data['original'] = data['now']
+            data['lose_num'] = 0
+        elif 'ratio' in data:
+            data['now'] += (data['original'] * data['ratio'] * (float(times) - 1))
+
         self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
         Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
 
     #输
     def lose(self, times):
         data = self.balance['cash'][times]
-        data['now'] -= (data['original'] * data['ratio'])
+        if 'ratios' in data:
+            data['now'] -= (data['original'] * data['ratios'][data['lose_num']])
+            data['lose_num'] += 1
+        elif 'ratio' in data:
+            data['now'] -= (data['original'] * data['ratio'])
+
         self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
         Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
 
-    #回滚
-    def rollback(self, times):
-        data = self.balance['cash'][times]
-        data['now'] -= (data['original'] * data['ratio'] * (float(times) - 1))
-        self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
-        # Logging.info(u'回滚数据库, {}'.format(self.balance))
+    # #回滚
+    # def rollback(self, times):
+    #     data = self.balance['cash'][times]
+    #     data['now'] -= (data['original'] * data['ratio'] * (float(times) - 1))
+    #     self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
+    #     # Logging.info(u'回滚数据库, {}'.format(self.balance))
 
     #获取下注金
     def get(self, times):
         data = self.balance['cash'][times]
-        return data['original'] * data['ratio']
+        if 'ratios' in data:
+            return data['original'] * data['ratios'][data['lose_num']]
+        elif 'ratio' in data:
+            return data['original'] * data['ratio']
+
 
     #判断赔率所对应的目标值是否达到
     def isTargetAchieved(self, times):

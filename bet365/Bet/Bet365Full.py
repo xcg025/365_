@@ -179,38 +179,39 @@ class Bet365Full(Bet365):
                     # 如果进球取消且已经下注了，则删除sucesses表的记录，同时投注金额也要回滚
                     if self.collections[md5]['goal_cancel'] == True and all_goals == win_goals - 1:
                         self.collections[md5]['any_bet_succeed'] = False
-                        betted_cancel = False
-                        cancel_hint = '恼之， '
-                        for (times, betted) in self.collections[md5]['times_betteds'].items():  # 投注回滚
-                            if betted == True:  # 已经下注的则要回滚
-                                self.balance.rollback(times)
-                                betted_cancel = True
-                                cancel_hint = cancel_hint + times + 'times '
-                        if betted_cancel:
-                            delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_SUCCESSES, self.collections[md5])
-                            save_ok = self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
-                            if delete_ok and save_ok:
-                                Logging.info('{}---{}'.format(cancel_hint, self.collections[md5]))
-                                Mail.send(cancel_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
+                        # betted_cancel = False
+                        # # cancel_hint = '恼之， '
+                        # for (times, betted) in self.collections[md5]['times_betteds'].items():  # 投注回滚
+                        #     if betted == True:  # 已经下注的则要回滚
+                        #         # self.balance.rollback(times)
+                        #         betted_cancel = True
+                        #         # cancel_hint = cancel_hint + times + 'times '
+                        # if betted_cancel:
+                        #     delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_SUCCESSES, self.collections[md5])
+                        #     save_ok = self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
+                        #     # if delete_ok and save_ok:
+                        #     #     Logging.info('{}---{}'.format(cancel_hint, self.collections[md5]))
+                        #     #     Mail.send(cancel_hint, json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
                     elif self.collections[md5]['goal_cancel'] == False and all_goals == win_goals:
                         self.collections[md5]['any_bet_succeed'] = True
-                        betted_success = False
-                        win_hint = '得之， '
-                        for (times, betted) in self.collections[md5]['times_betteds'].items():  # 判断进球是否下注，且列出下注的倍数
-                            if betted == True:
-                                self.balance.win(times)
-                                betted_success = True
-                                win_hint = win_hint + times + '倍 '
-                        if betted_success:  # 进球且已经下注，则增加记录
-                            save_ok = self.mongo.saveMatch(userConfig.MONGO_TABLE_SUCCESSES, self.collections[md5])
-                            delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_COLLECTIONS,
-                                                               self.collections[md5])
-
-                            Mail.send(win_hint,json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
-
-                            if delete_ok and save_ok:
-                                Logging.info('{}---{}'.format(win_hint, self.collections[md5]))
-                            continue
+                        continue
+                        # # betted_success = False
+                        # # win_hint = '得之， '
+                        # for (times, betted) in self.collections[md5]['times_betteds'].items():  # 判断进球是否下注，且列出下注的倍数
+                        #     if betted == True:
+                        #         # self.balance.win(times)
+                        #         betted_success = True
+                        #         # win_hint = win_hint + times + '倍 '
+                        # if betted_success:  # 进球且已经下注，则增加记录
+                        #     # save_ok = self.mongo.saveMatch(userConfig.MONGO_TABLE_SUCCESSES, self.collections[md5])
+                        #     # delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_COLLECTIONS,
+                        #     #                                    self.collections[md5])
+                        #
+                        #     # Mail.send(win_hint,json.dumps(self.collections[md5]['parties_name'], ensure_ascii=False))
+                        #
+                        #     # if delete_ok and save_ok:
+                        #     #     Logging.info('{}---{}'.format(win_hint, self.collections[md5]))
+                        #     continue
 
                 print_need = True
 
@@ -343,21 +344,26 @@ class Bet365Full(Bet365):
         for (md5_key, running) in self.runnings.items():
             if running == False and md5_key in self.collections:
                 betted_lose = False
-                lose_hint = '失之， '
+                lose_hint = '失之, '
+                win_hint = '得之,'
                 already_goals = self.collections[md5_key]['all_goals']
                 win_goals = self.collections[md5_key]['win_goals']
                 for (times, betted) in self.collections[md5_key]['times_betteds'].items():
-                    if betted == True and already_goals < win_goals:
-                        self.balance.lose(times)
-                        betted_lose = True
-                        lose_hint = lose_hint + times + 'times '
+                    if betted == True:
+                        if already_goals < win_goals:
+                            self.balance.lose(times)
+                            betted_lose = True
+                            lose_hint = lose_hint + times + ' '
+                        else:
+                            self.balance.win(times)
+                            betted_lose = False
+                            win_hint = win_hint + times + ' '
 
                 delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5_key])
                 if delete_ok:
                     if betted_lose == True:
-                        Logging.info('{}---{}'.format(lose_hint, self.collections[md5_key]))
                         Mail.send(lose_hint, json.dumps(self.collections[md5_key]['parties_name'], ensure_ascii=False))
                     else:
-                        pass
-                        # Logging.info('删除比赛---{}'.format(self.collections[md5_key]))
+                        self.mongo.saveMatch(userConfig.MONGO_TABLE_SUCCESSES, self.collections[md5_key])
+                        Mail.send(win_hint, json.dumps(self.collections[md5_key]['parties_name'], ensure_ascii=False))
                 self.collections.pop(md5_key)
