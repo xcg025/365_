@@ -345,7 +345,7 @@ class Bet365Full(Bet365):
             if running == False and md5_key in self.collections:
                 betted_lose = False
                 lose_hint = '失之, '
-                win_hint = '得之,'
+                win_hint = '得之, '
                 is_betted = False
                 already_goals = self.collections[md5_key]['all_goals']
                 win_goals = self.collections[md5_key]['win_goals']
