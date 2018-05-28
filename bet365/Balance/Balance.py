@@ -43,7 +43,7 @@ class Balance(object):
             data['now'] += (data['original'] * data['ratio'] * (float(times) - 1))
 
         self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
-        Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
+        # Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
 
     #输
     def lose(self, times):
@@ -55,7 +55,7 @@ class Balance(object):
             data['now'] -= (data['original'] * data['ratio'])
 
         self.mongo.updateBalance(userConfig.MONGO_TABLE_BALANCE, self.balance)
-        Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
+        # Logging.info(u'更新{}倍数据库---{}'.format(times, self.balance))
 
     # #回滚
     # def rollback(self, times):
