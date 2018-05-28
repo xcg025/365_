@@ -96,24 +96,17 @@ RULE_HALF = {
     # 'initial_handicaps':{'0.5':{'min':1.0, 'max':2.5}, '0.5,1.0':{'min':1.0, 'max':2.5},
                             #  '1':{'min':1.0, 'max':2.5}, '1.0':{'min':1.0, 'max':2.5},
                             #  '1.0,1.5': {'min': 2.05, 'max': 2.5}} ,
-    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.75, 'max':2.5}},   # 3.25--->3.75
+    # 'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.75, 'max':2.5}},   # 3.25--->3.75
+    'initial_handicaps':{'1.0,1.5': {'min': 1.5, 'max': 1.85}, '1.5':{'min':1.90, 'max':2.5}},   # 3.25--->3.5
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':12}},
     'initial_minutes':{'min':0, 'max':0},
     'half_time':45,
     'quick_goal_interval':3.30,
     'all_bets_info':{
         'arleady_goals':{
-                3:{ 'allow_quick_goal_num':0, 'goal_cancel_forbidden':True, 'one_party_zero':True,
+                1:{ 'goal_cancel_forbidden':True,
                     'all_goal_times': {
-                        1: {'min': 0, 'max': 16},
-                        2: {'min': 12, 'max': 45},
-                        3: {'min': 23, 'max': 37}
-                    }
-                },
-                4:{ 'allow_quick_goal_num':1, 'goal_cancel_forbidden':True, 'one_party_zero':True,
-                    'all_goal_times': {
-                        1: {'min': 0, 'max': 10},
-                        4: {'min': 23, 'max': 37}
+                        1: {'min': 0, 'max': 6},
                     }
                 },
         },
