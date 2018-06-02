@@ -77,6 +77,16 @@ RULE_FULL = {
                     },
                 }
             },
+            7: {'goal_cancel_forbidden': True, 'last_half_goals':[5],
+                'one_party_zero_allow':False,
+                'when_last_half_goals': {
+                    5: {
+                        'all_goal_times': {
+                            7: {'min': 45, 'max': 75},
+                        },
+                    },
+                }
+            },
         },
         'ready_bets':{
             '2':{'obey_any_success': True },
