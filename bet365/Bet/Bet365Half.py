@@ -48,14 +48,14 @@ class Bet365Half(Bet365):
             # 初步筛选比赛
             time_ok = (time_now >= userConfig.RULE_HALF['initial_minutes']['min'] and \
                        time_now <= userConfig.RULE_HALF['initial_minutes']['max'])
-            odds_ok = False
+            #odds_ok = False
 
-            if handicap in userConfig.RULE_HALF['initial_handicaps']:
-                odds_ok = (odds >= userConfig.RULE_HALF['initial_handicaps'][handicap]['min'] and \
-                           odds <= userConfig.RULE_HALF['initial_handicaps'][handicap]['max'])
+            #if handicap in userConfig.RULE_HALF['initial_handicaps']:
+                #odds_ok = (odds >= userConfig.RULE_HALF['initial_handicaps'][handicap]['min'] and \
+                #           odds <= userConfig.RULE_HALF['initial_handicaps'][handicap]['max'])
 
-            # handicap_ok = handicap in userConfig.RULE_HALF['initial_handicaps']
-            if time_ok and odds_ok:  # 满足时间和赔率要求
+            handicap_ok = handicap in userConfig.RULE_HALF['initial_handicaps']
+            if time_ok and handicap_ok:  # 满足时间和赔率要求
             # if time_ok:
                 matchDict = {
                     'parties_name': names,
