@@ -63,7 +63,7 @@ class Bet365Full(Bet365):
                     'last_half_score':None,
                     'goals_time': [],
                     'interval_goals_time':[],
-                    'times_betteds': {'3':False, '4':False,},
+                    'times_betteds': {'3':False, '2':False,},
                     'full_handicap': handicap,
                     'full_handicap_odds': odds,
                     'play_time': 0.0,
@@ -256,6 +256,12 @@ class Bet365Full(Bet365):
                 latest_goal_times_dict = infos_all.get('latest_goal_times', None)
                 if latest_goal_times_dict and self.min_max_condition(latest_goal_times_dict, float(goals_time[-1])) == False:
                     print('{}, latest_goal_time_ok=no'.format(names))
+                    continue
+
+                # 第一个进球时间是否满足条件
+                first_goal_times_dict = infos_all.get('first_goal_times', None)
+                if first_goal_times_dict and self.min_max_condition(first_goal_times_dict, float(goals_time[0])) == False:
+                    print('{}, first_goal_time_ok=no'.format(names))
                     continue
 
                 #判断两队进球比分相差是否小于x
