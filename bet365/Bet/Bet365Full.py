@@ -250,7 +250,7 @@ class Bet365Full(Bet365):
 
                 #是否考虑周末的比赛
                 weekend_consider = infos_all.get('weekend_consider', False)
-                if weekend_consider:
+                if weekend_consider and WeekDay.isWeekend():
                     print('{}, weekend_consider_ok=no'.format(names))
                     continue
 
