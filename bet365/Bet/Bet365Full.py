@@ -9,7 +9,7 @@ from LoggingTool.Logging import Logging
 from MatchParseTool.MatchParse import MatchParse
 from MatchOperationTool.MatchOperation import MatchOperation
 from MailTool.Mail import Mail
-from WeekDay import WeekDay
+from WeekDayTool.WeekDay import WeekDay
 
 class Bet365Full(Bet365):
     def __init__(self):
