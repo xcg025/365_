@@ -9,6 +9,7 @@ from LoggingTool.Logging import Logging
 from MatchParseTool.MatchParse import MatchParse
 from MatchOperationTool.MatchOperation import MatchOperation
 from MailTool.Mail import Mail
+from WeekDay import WeekDay
 
 class Bet365Full(Bet365):
     def __init__(self):
@@ -99,7 +100,16 @@ class Bet365Full(Bet365):
                         odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
                                    odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
 
-                        if odds_ok:
+                        ratios_ok = True
+                        initial_ratios_consider = userConfig.RULE_FULL('initial_ratios_consider', False)
+                        if initial_ratios_consider:
+                            sorted_ratio = sorted(ratios)
+                            ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
+                                         sorted_ratio[0] <= userConfig.RULE_FULL['initial_ratios']['weak']['max']) and \
+                                        (sorted_ratio[1] >= userConfig.RULE_FULL['initial_ratios']['strong']['min'] and \
+                                         sorted_ratio[1] <= userConfig.RULE_FULL['initial_ratios']['strong']['max'])
+
+                        if odds_ok and ratios_ok:
                             pass
                             # self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
                         else:
@@ -237,6 +247,12 @@ class Bet365Full(Bet365):
                        (isinstance(last_half_goals_all, list) and last_half_all_goals not in last_half_goals_all):
                         self.collections.pop(md5)
                         continue
+
+                #是否考虑周末的比赛
+                weekend_consider = infos_all.get('weekend_consider', False)
+                if weekend_consider:
+                    print('{}, weekend_consider_ok=no'.format(names))
+                    continue
 
                 # 是否有球取消
                 goal_cancel_forbidden = infos_all.get('goal_cancel_forbidden', False)

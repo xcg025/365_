@@ -23,8 +23,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟',]
 ForbiddenMatches_Half = ['80分钟',]
 
-ForbiddenLeagues_Full = ['80分钟', '19']
-ForbiddenMatches_Full = ['80分钟', '19']
+ForbiddenLeagues_Full = ['80分钟', ]
+ForbiddenMatches_Full = ['80分钟', ]
 
 # full_lgt_min = 45
 # full_lgt_max = 75
@@ -36,26 +36,22 @@ RULE_FULL = {
     # 'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75 , 'max': 2.5}},   #3.0---->3.75
     # 'initial_handicaps': { '3.5': {'min': 1.825 , 'max': 2.5}},   #3.25---->3.5
     'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.825 , 'max': 2.5}},   #3.0---->3.5
-    # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},
-
+    'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},  #1.25---->1 .75
+    'initial_ratios_consider': True,
     'initial_minutes': {'min': 0, 'max': 0},
     'half_time': 45,
     'full_time': 90,
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            7: {'goal_cancel_forbidden': False, 'one_party_zero_allow':True, 'last_half_goals':[2, 3, 4, 5, 6],
-                 'first_goal_times': {'min':0, 'max':25}, 'latest_goal_times': {'min':65, 'max':81},
-                # 'when_last_half_goals': {
-                #     6: {
-                #         'all_goal_times': {
-                #             7: {'min': 45, 'max': 81},
-                #         },
-                #     },
-                # }
+            3: {'goal_cancel_forbidden': True, 'one_party_zero_allow':True, 'last_half_goals':[3],
+                 'latest_goal_times': {'min':0, 'max':45}, 'weekend_consider': True,
             },
-            8: {'goal_cancel_forbidden': False, 'one_party_zero_allow':True, 'last_half_goals':[2, 3, 4, 5, 6, 7],
-                 'first_goal_times': {'min':0, 'max':25}, 'latest_goal_times': {'min':65, 'max':81},
+            4: {'goal_cancel_forbidden': True, 'one_party_zero_allow':True, 'last_half_goals':[3],
+                 'latest_goal_times': {'min':45, 'max':80},
+            },
+            5: {'goal_cancel_forbidden': True, 'one_party_zero_allow': True, 'last_half_goals': [4],
+                'latest_goal_times': {'min': 45, 'max': 80},
                 # 'when_last_half_goals': {
                 #     7: {
                 #         'all_goal_times': {
