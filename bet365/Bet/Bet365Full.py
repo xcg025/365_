@@ -101,7 +101,7 @@ class Bet365Full(Bet365):
                                    odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
 
                         ratios_ok = True
-                        initial_ratios_consider = userConfig.RULE_FULL('initial_ratios_consider', False)
+                        initial_ratios_consider = userConfig.RULE_FULL.get('initial_ratios_consider', False)
                         if initial_ratios_consider:
                             sorted_ratio = sorted(ratios)
                             ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
