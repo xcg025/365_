@@ -80,7 +80,7 @@ RULE_FULL = {
                     }
                 }
             },
-            6: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [3, 4, 5], 'first_goal_times':{'min': 0, 'max': 15},
+            6: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [3, 4], 'first_goal_times':{'min': 0, 'max': 15},
                 'latest_goal_times': {'min': 45, 'max': 75},
             },
             # 5: {'goal_cancel_forbidden': True, 'one_party_zero_allow': True, 'last_half_goals': [4],
