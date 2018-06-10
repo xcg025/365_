@@ -45,13 +45,42 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            3: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [1, 2, 3], 'first_goal_times':{'min': 0, 'max': 30},
+            3: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [1, 2, 3],
                  'latest_goal_times': {'min': 0, 'max': 75}, 'two_goals_interval_min':4.30, 'allow_quick_goal_num':0,
+                'when_last_half_goals': {
+                    1:{
+                        'all_goal_times':{
+                            1:{'min': 0, 'max': 30}
+                        }
+                    },
+                    2:{
+                        'all_goal_times':{
+                            1:{'min': 0, 'max': 30}
+                        }
+                    },
+                    3:{
+                        'all_goal_times':{
+                            1:{'min': 0, 'max': 20}
+                        }
+                    }
+                }
             },
-            4: {'goal_cancel_forbidden': False, 'one_party_zero_allow':False, 'last_half_goals':[2, 3], 'first_goal_times':{'min': 0, 'max': 30},
+            4: {'goal_cancel_forbidden': False, 'one_party_zero_allow':False, 'last_half_goals':[2, 3],
                  'latest_goal_times': {'min': 45, 'max': 75}, 'two_goals_interval_min':4.30, 'allow_quick_goal_num':1,
+                'when_last_half_goals': {
+                    2:{
+                        'all_goal_times':{
+                            1:{'min': 0, 'max': 30}
+                        }
+                    },
+                    3:{
+                        'all_goal_times':{
+                            1:{'min': 0, 'max': 20}
+                        }
+                    }
+                }
             },
-            6: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [3, 4, 5], 'first_goal_times':{'min': 0, 'max': 30},
+            6: {'goal_cancel_forbidden': False, 'one_party_zero_allow': False, 'last_half_goals': [3, 4, 5], 'first_goal_times':{'min': 0, 'max': 15},
                 'latest_goal_times': {'min': 45, 'max': 75},
             },
             # 5: {'goal_cancel_forbidden': True, 'one_party_zero_allow': True, 'last_half_goals': [4],
