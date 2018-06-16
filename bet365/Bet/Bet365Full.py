@@ -281,6 +281,12 @@ class Bet365Full(Bet365):
                     print('{}, first_goal_time_ok=no'.format(names))
                     continue
 
+                # 下半场第一个进球时间是否满足条件
+                next_half_first_goal_times_dict = infos_all.get('next_half_first_goal_times', None)
+                if next_half_first_goal_times_dict and self.min_max_condition(next_half_first_goal_times_dict, float(goals_time[last_half_all_goals])) == False:
+                    print('{}, next_half_first_goal_time_ok=no'.format(names))
+                    continue
+
                 #判断两队进球比分相差是否小于x
                 parties_goals_minus_dict = infos_all.get('all_parties_goals_minus', None)
                 all_parties_goals_minus = abs(int(score.split(':')[0])-int(score.split(':')[1]))
