@@ -64,7 +64,7 @@ class Bet365Full(Bet365):
                     'last_half_score':None,
                     'goals_time': [],
                     'interval_goals_time':[],
-                    'times_betteds': {'3':False,},
+                    'times_betteds': {'3':False, '2':False,},
                     'full_handicap': handicap,
                     'full_handicap_odds': odds,
                     'play_time': 0.0,
