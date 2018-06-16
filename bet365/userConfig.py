@@ -32,10 +32,10 @@ ForbiddenMatches_Full = ['80分钟', ]
 
 
 RULE_FULL = {
-    'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,  #1---->2.75
+    # 'initial_handicaps':{'1.5':{'min':1.0, 'max':2.5}, '2.5':{'min':1.61, 'max':2.5}} ,  #1---->2.75
     # 'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.75 , 'max': 2.5}},   #3.0---->3.75
     # 'initial_handicaps': { '3.5': {'min': 1.825 , 'max': 2.15}},   #3.25---->3.5
-    # 'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.825 , 'max': 2.5}},   #3.0---->3.5
+    'initial_handicaps': {'2.5': {'min': 1.0, 'max': 1.57}, '3.5': {'min': 1.825 , 'max': 2.5}},   #3.0---->3.5
 
     # 'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':5, 'max':9.5}},  #1.25---->1 .75
     'initial_ratios':{'weak':{'min':1.0, 'max':1.55}, 'strong':{'min':4.2, 'max':50}},  #1.0---->xxx
