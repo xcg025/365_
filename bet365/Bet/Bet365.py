@@ -9,6 +9,7 @@ from MatchParseTool.MatchParse import MatchParse
 from MatchOperationTool.MatchOperation import MatchOperation
 from MailTool.Mail import Mail
 from DsFootballTool.DsFootball import DsFootball
+from RedisTool.db_redis import RedisFactory
 
 
 class Bet365(object):
@@ -25,6 +26,7 @@ class Bet365(object):
         self.balance = Balance(self.type)
         self.initSth()
         self.ds = DsFootball()
+        self.redis = RedisFactory().create_redis('match')
 
     def initSth(self):
         self.balance.updateBalance()
