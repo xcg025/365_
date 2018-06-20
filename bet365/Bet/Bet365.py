@@ -26,7 +26,7 @@ class Bet365(object):
         self.balance = Balance(self.type)
         self.initSth()
         self.ds = DsFootball()
-        self.redis = RedisFactory().create_redis('match')
+        self.redis = RedisFactory().create_redis('match', '127.0.0.1', 'ajmd123', 6379, 0)
 
     def initSth(self):
         self.balance.updateBalance()
