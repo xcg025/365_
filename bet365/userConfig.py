@@ -47,9 +47,14 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            5: {'goal_cancel_forbidden': False, 'one_party_zero_allow': True, 'last_half_goals': [2, 3, 4],
-                 'latest_goal_times': {'min': 45, 'max': 75}, 'first_goal_times': {'min': 0, 'max': 30},
-                'all_parties_goals_minus':{'min':5, 'max':5},
+            5: {'goal_cancel_forbidden': False, 'last_half_goals': [2, 3, 4],
+                 'latest_goal_times': {'min': 45, 'max': 75}, 'first_goal_times': {'min': 0, 'max': 15},
+                'all_parties_goals_minus':{'min':2, 'max':4}, 'next_half_first_goal_times':{'min': 45, 'max': 55}
+            },
+
+            6: {'goal_cancel_forbidden': False, 'last_half_goals': [2, 3, 4, 5],
+                 'latest_goal_times': {'min': 45, 'max': 75}, 'first_goal_times': {'min': 0, 'max': 15},
+                'all_parties_goals_minus':{'min':2, 'max':5}, 'next_half_first_goal_times':{'min': 45, 'max': 55}
             },
             # 6: {'goal_cancel_forbidden': True, 'one_party_zero_allow':False, 'last_half_goals':[2, 3, 4, 5],
             #      'latest_goal_times': {'min': 45, 'max': 75}, 'next_half_first_goal_times': {'min': 45, 'max': 55},
