@@ -46,10 +46,10 @@ class Bet365Full(Bet365):
             # 筛选比赛
             time_ok = (time_now >= userConfig.RULE_FULL['initial_minutes']['min'] and \
                        time_now <= userConfig.RULE_FULL['initial_minutes']['max'])
-            # odds_ok = False
-            # if handicap in userConfig.RULE_FULL['initial_handicaps']:
-            #     odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
-            #                odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
+            odds_ok = False
+            if handicap in userConfig.RULE_FULL['initial_handicaps']:
+                odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
+                           odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
 
             # sorted_ratio = sorted(ratios)
             # ratios_ok = (sorted_ratio[0] >= userConfig.RULE_FULL['initial_ratios']['weak']['min'] and
@@ -57,7 +57,7 @@ class Bet365Full(Bet365):
             #             (sorted_ratio[1] >= userConfig.RULE_FULL['initial_ratios']['strong']['min'] and \
             #              sorted_ratio[1] <= userConfig.RULE_FULL['initial_ratios']['strong']['max'])
 
-            if time_ok:
+            if time_ok and odds_ok:
                 matchDict = {
                     'parties_name': names,
                     'score': score,
@@ -89,39 +89,39 @@ class Bet365Full(Bet365):
 
                 #判断当前未收藏的比赛是否在ds中
                 # if md5 not in self.collections and md5 in self.ds.fetch_all():
-                # if md5 not in self.collections:
-                #     self.collections[md5] = matchDict
-
-                if md5 not in self.collections and self.redis.exists('bet_365_matches', md5):
+                if md5 not in self.collections:
                     self.collections[md5] = matchDict
+
+                # if md5 not in self.collections and self.redis.exists('bet_365_matches', md5):
+                #     self.collections[md5] = matchDict
 
             # 如果比赛正在进行且在收藏中
             if md5 in self.collections.keys() and time_now != 0:
                 # 更新比赛开始的时间且加入数据库
                 if self.collections[md5]['start_time'] == None:
-                    # if handicap in userConfig.RULE_FULL['initial_handicaps']:
-                    #     odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
-                    #                odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
-                    #
-                    #     ratios_ok = True
-                    #     initial_ratios_consider = userConfig.RULE_FULL.get('initial_ratios_consider', False)
-                    #     initial_ratios = userConfig.RULE_FULL.get('initial_ratios_consider', None)
-                    #     if initial_ratios_consider and initial_ratios:
-                    #         sorted_ratio = sorted(ratios)
-                    #         ratios_ok = (sorted_ratio[0] >= initial_ratios['weak']['min'] and
-                    #                      sorted_ratio[0] <= initial_ratios['weak']['max']) and \
-                    #                     (sorted_ratio[1] >= initial_ratios['strong']['min'] and \
-                    #                      sorted_ratio[1] <= initial_ratios['strong']['max'])
-                    #
-                    #     if odds_ok and ratios_ok:
-                    #         pass
-                    #         # self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
-                    #     else:
-                    #         self.collections.pop(md5)
-                    #         continue
-                    # else:
-                    #     self.collections.pop(md5)
-                    #     continue
+                    if handicap in userConfig.RULE_FULL['initial_handicaps']:
+                        odds_ok = (odds >= userConfig.RULE_FULL['initial_handicaps'][handicap]['min'] and \
+                                   odds <= userConfig.RULE_FULL['initial_handicaps'][handicap]['max'])
+
+                        ratios_ok = True
+                        initial_ratios_consider = userConfig.RULE_FULL.get('initial_ratios_consider', False)
+                        initial_ratios = userConfig.RULE_FULL.get('initial_ratios_consider', None)
+                        if initial_ratios_consider and initial_ratios:
+                            sorted_ratio = sorted(ratios)
+                            ratios_ok = (sorted_ratio[0] >= initial_ratios['weak']['min'] and
+                                         sorted_ratio[0] <= initial_ratios['weak']['max']) and \
+                                        (sorted_ratio[1] >= initial_ratios['strong']['min'] and \
+                                         sorted_ratio[1] <= initial_ratios['strong']['max'])
+
+                        if odds_ok and ratios_ok:
+                            pass
+                            # self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])
+                        else:
+                            self.collections.pop(md5)
+                            continue
+                    else:
+                        self.collections.pop(md5)
+                        continue
 
                     self.collections[md5]['start_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                     if (self.mongo.saveMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5])):
@@ -394,7 +394,7 @@ class Bet365Full(Bet365):
                             betted_lose = False
                             win_hint = win_hint + times + ' '
 
-                self.redis.remove('bet_365_matches', md5_key)
+                # self.redis.remove('bet_365_matches', md5_key)
                 delete_ok = self.mongo.deleteMatch(userConfig.MONGO_TABLE_COLLECTIONS, self.collections[md5_key])
                 if delete_ok and is_betted == True:
                     if betted_lose == True:
