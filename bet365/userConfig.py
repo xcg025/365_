@@ -47,15 +47,14 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            3: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 75},
-                'next_half_first_goal_times':{'min': 45, 'max': 55}, 'last_half_goals': [1, 2],
+            2: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
+                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1],
             },
-
-            4: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 75},
-                'next_half_first_goal_times': {'min': 45, 'max': 55}, 'last_half_goals': [1, 2, 3],
-                },
-            5: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 75},
-                'next_half_first_goal_times': {'min': 45, 'max': 55}, 'last_half_goals': [1, 2, 3],
+            3: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
+                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1, 2],
+            },
+            4: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
+                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1, 2, 3],
                 },
         },
         'ready_bets':{
