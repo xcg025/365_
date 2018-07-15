@@ -9,7 +9,8 @@ MONGO_TABLE_BETS = 'bets'
 MONGO_TABLE_SUCCESSES = 'successes'
 MONGO_TABLE_BALANCE = 'balance'
 
-URL = 'https://www.7788365365.com/#/HO/'
+URL = 'https://www.58365365.com'
+# URL = 'https://www.7788365365.com/#/HO/'
 #URL = 'https://www.356884.com/zh-CHS/'
 #URL = 'https://www.365-838.com/zh-CHS/'
 refreshMin = 0
@@ -23,8 +24,8 @@ AsiaHalfItem = '上半場亞洲盤'
 ForbiddenLeagues_Half = ['80分钟',]
 ForbiddenMatches_Half = ['80分钟',]
 
-ForbiddenLeagues_Full = ['80分钟', ]
-ForbiddenMatches_Full = ['80分钟', ]
+ForbiddenLeagues_Full = ['80分钟', '女', '19']
+ForbiddenMatches_Full = ['80分钟', '女', '19']
 
 # full_lgt_min = 45
 # full_lgt_max = 75
@@ -47,15 +48,19 @@ RULE_FULL = {
     'quick_goal_interval': 4.30,
     'all_bets_info': {
         'already_goals': {
-            2: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
+            2: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 60},
                 'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1],
             },
-            3: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
+            3: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 60},
                 'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1, 2],
+                'when_last_half_goals':{
+                    2:{
+                        'all_goal_times':{
+                            2:{'min': 25, 'max': 45}
+                        }
+                    }
+                }
             },
-            4: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 62},
-                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1, 2, 3],
-                },
         },
         'ready_bets':{
             '2':{'obey_any_success': True },
