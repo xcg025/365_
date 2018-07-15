@@ -94,7 +94,8 @@ class MatchOperation(object):
             if names_ok and odds_ok and handicap_ok:
                 cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", money)
                 while ((cls.browser.isElementPresent(ByType.CSS_SELECTOR, '.bs-Footer') == True)):
-                    cls.procUnmatch(goals)
+                    # cls.procUnmatch(goals)
+                    print('odds_ok--->{}, handicap_ok--->{}'.format(odds_ok, handicap_ok))
                     accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
                     bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
                     print('accept_btn_visible={}, bet_btn_visible={}'.format(accept_btn_visible, bet_btn_visible))
