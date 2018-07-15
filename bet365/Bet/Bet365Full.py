@@ -228,7 +228,7 @@ class Bet365Full(Bet365):
                         #     continue
 
                 print_need = True
-                print('{}'.format(names))
+                # print('{}'.format(names))
 
                 #是否是下半场
                 if self.collections[md5]['next_half'] == False:
