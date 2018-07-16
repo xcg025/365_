@@ -50,6 +50,7 @@ class Bet365(object):
         MatchOperation.clickBetForMatch(self.section, self.row)
         #下注
         money_bet = str(self.balance.get(times))
+        print('money_bet--->{}'.format(money_bet))
         is_pay_sucess = MatchOperation.payForMatch(names, times, goals, money_bet)
 
         # 如果金额发生变化，则认为投注成功

@@ -82,6 +82,7 @@ class MatchOperation(object):
         is_pay_success = False
         try:
             cls.switch2BetFrame()
+            print('begin payForMatch step1......')
             # 判断比赛有没有错乱的情况
             theNames = cls.browser.textForElement(ByType.XPATH, "//div[@class='bs-Selection']/div[3]")
             odds = cls.browser.textForElement(ByType.CSS_SELECTOR, '.bs-Odds')
@@ -91,6 +92,7 @@ class MatchOperation(object):
             odds_ok = (odds != None and float(odds) >= float(times))
             handicap_ok = (handicap != None and isinstance(handicap,str) and "," not in handicap and ((float(handicap) > goals) and (float(handicap) < goals + 1)))
 
+            print('begin payForMatch step2......')
             if names_ok:
             # if names_ok and odds_ok and handicap_ok:
                 cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", '2')
