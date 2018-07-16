@@ -25,8 +25,8 @@ class Bet365Full(Bet365):
 
         for aMatch in self.allMatches():
             names = MatchParse.nameForMatch(aMatch)
-            self.doPay(names, '2', 2.5)
-            return
+            # self.doPay(names, '2', 2.5)
+            # return
             if MatchOperation.hasForbiddenMatch(names, 1) == True:
                 continue
 

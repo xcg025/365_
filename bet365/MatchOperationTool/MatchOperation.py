@@ -91,12 +91,9 @@ class MatchOperation(object):
             odds_ok = (odds != None and float(odds) >= float(times))
             handicap_ok = (handicap != None and isinstance(handicap,str) and "," not in handicap and ((float(handicap) > goals) and (float(handicap) < goals + 1)))
 
-            print('names_ok--->{}'.format(names_ok))
-            print('theNames--->{}, names--->{}'.format(theNames, names))
-            if names_ok:
-            # if names_ok and odds_ok and handicap_ok:
-                cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", '2')
-                print('fsdfsafasfsfdsfsdfsaf')
+            # if names_ok:
+            if names_ok and odds_ok and handicap_ok:
+                cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", money)
                 print('odds_ok--->{}, handicap_ok--->{}'.format(odds_ok, handicap_ok))
                 accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
                 bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
