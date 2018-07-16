@@ -91,22 +91,34 @@ class MatchOperation(object):
             odds_ok = (odds != None and float(odds) >= float(times))
             handicap_ok = (handicap != None and isinstance(handicap,str) and "," not in handicap and ((float(handicap) > goals) and (float(handicap) < goals + 1)))
 
-            if names_ok and odds_ok and handicap_ok:
-                cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", money)
-                while ((cls.browser.isElementPresent(ByType.CSS_SELECTOR, '.bs-Footer') == True)):
-                    # cls.procUnmatch(goals)
-                    print('odds_ok--->{}, handicap_ok--->{}'.format(odds_ok, handicap_ok))
-                    accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
-                    bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
-                    print('accept_btn_visible={}, bet_btn_visible={}'.format(accept_btn_visible, bet_btn_visible))
-                    if bet_btn_visible:
-                        cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnHover')
-                        is_pay_success = True
-                    elif accept_btn_visible:
-                        cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnAccept')
-                        is_pay_success = False
-                    time.sleep(2)
-                    print('还没投完注')
+            if names_ok:
+            # if names_ok and odds_ok and handicap_ok:
+                cls.browser.setElementText(ByType.XPATH, "//input[@class='stk bs-Stake_TextBox']", 2)
+                print('odds_ok--->{}, handicap_ok--->{}'.format(odds_ok, handicap_ok))
+                accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
+                bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
+                print('accept_btn_visible={}, bet_btn_visible={}'.format(accept_btn_visible, bet_btn_visible))
+                if bet_btn_visible:
+                    cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnHover')
+                    is_pay_success = True
+                elif accept_btn_visible:
+                    cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnAccept')
+                    is_pay_success = False
+                time.sleep(2)
+                # while ((cls.browser.isElementPresent(ByType.CSS_SELECTOR, '.bs-Footer') == True)):
+                #     # cls.procUnmatch(goals)
+                #     print('odds_ok--->{}, handicap_ok--->{}'.format(odds_ok, handicap_ok))
+                #     accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
+                #     bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
+                #     print('accept_btn_visible={}, bet_btn_visible={}'.format(accept_btn_visible, bet_btn_visible))
+                #     if bet_btn_visible:
+                #         cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnHover')
+                #         is_pay_success = True
+                #     elif accept_btn_visible:
+                #         cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnAccept')
+                #         is_pay_success = False
+                #     time.sleep(2)
+                #     print('还没投完注')
 
                 print('投注结束')
         except Exception as e:
