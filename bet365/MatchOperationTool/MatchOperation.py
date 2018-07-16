@@ -98,12 +98,13 @@ class MatchOperation(object):
                 accept_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnAccept')
                 bet_btn_visible = cls.browser.isElementVisible(ByType.CSS_SELECTOR, '.bs-BtnHover')
                 print('accept_btn_visible={}, bet_btn_visible={}'.format(accept_btn_visible, bet_btn_visible))
+                is_pay_success = False
                 if bet_btn_visible:
                     cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnHover')
                     is_pay_success = True
-                elif accept_btn_visible:
-                    cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnAccept')
-                    is_pay_success = False
+                # elif accept_btn_visible:
+                #     cls.browser.clickElement(ByType.CSS_SELECTOR, '.bs-BtnAccept')
+                #     is_pay_success = False
                 time.sleep(2)
                 # while ((cls.browser.isElementPresent(ByType.CSS_SELECTOR, '.bs-Footer') == True)):
                 #     # cls.procUnmatch(goals)
