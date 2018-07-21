@@ -49,10 +49,10 @@ RULE_FULL = {
     'all_bets_info': {
         'already_goals': {
             2: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 60},
-                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1],
+                'first_goal_times':{'min': 0, 'max': 25}, 'last_half_goals': [1],
             },
-            3: {'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 60},
-                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [1, 2],
+            3: {'one_party_zero_allow': False, 'goal_cancel_forbidden': False, 'latest_goal_times': {'min': 45, 'max': 60},
+                'first_goal_times':{'min': 0, 'max': 20}, 'last_half_goals': [2],
                 'when_last_half_goals':{
                     2:{
                         'all_goal_times':{
